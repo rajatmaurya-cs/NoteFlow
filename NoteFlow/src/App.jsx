@@ -10,7 +10,12 @@ function App() {
 
   return (
    <>
-    <Navbar />
+   <main>
+
+     <Navbar />
+   
+   </main>
+  
    <Routes>
 
     
