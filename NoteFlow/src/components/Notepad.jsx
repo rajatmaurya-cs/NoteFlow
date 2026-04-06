@@ -3,48 +3,48 @@ import JoditEditor from "jodit-react";
 import { Notes } from "./mockData";
 const Notepad = () => {
 
+//    <JoditEditor
 
+//                 value={content}
+//                 config={config}
+//                 onChange={(e)=>setContent(e.target.value)}
+//             />
+//  src="https://img.icons8.com/3d-fluency/94/trash.png"
+
+        const [subject,setsubject] = useState('');
+        const [title , settitle] = useState('');
+        const[date , setdate] = useState('');
 
     const [content, setContent] = useState("");
 
-    const config = useMemo(() => ({
-        readonly: false,
-        placeholder: "Start typing...",
-        height: 400,
-    }), []);
+
+    // const config = useMemo(() => ({
+    //     readonly: false,
+    //     placeholder: "Start typing...",
+    //     height: 400,
+    // }), []);
+
+    // const handlesubmit = (e)=>{
+    //     e.preventDefault();
+    // }
 
     return (
         <div style={{ maxWidth: "800px", margin: "40px auto" }}>
-            <h2>Jodit Editor in React</h2>
+          
 
-            <JoditEditor
+            <form action="">
+            <input 
+            onChange={(e)=>setsubject(e.target.value)}
+            value = {subject}
+            placeholder="Enter Subject"
+            type="text" />
+           
 
-                value={content}
-                config={config}
-                onChange={(e)=>setContent(e.target.value)}
-            />
 
-            <div className="flex items-center justify-center space-x-6 mt-10">
-                <button
-                    onClick={(e) => handlesubmit(e)}
-                    className="px-6 py-3 bg-blue-700 text-white rounded-2xl"
-                >
-                    Submit
-                </button>
 
-                <img
-                        onClick={()=>setContent('')}
-                    src="https://img.icons8.com/3d-fluency/94/trash.png"
-                    alt="trash"
-                    className="w-15 h-15 object-contain"
-                />
-            </div>
-
-            <div style={{ marginTop: "30px" }}>
-
-                <h3>Preview:</h3>
-                <div dangerouslySetInnerHTML={{ __html: content }} />
-            </div>
+            </form>
+                
+         
 
         </div>
     );
