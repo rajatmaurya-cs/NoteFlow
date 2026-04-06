@@ -10,10 +10,10 @@ const Navbar = () => {
 
 
     const navItems = [
-        { name: "Home", path: "/", icon: <Home size={18} /> },
-        { name: "Notepad", path: "/notepad", icon: <Notebook size={18} /> },
-        { name: "Diary", path: "/diary", icon: <Book size={18} /> },
-        { name: "Activity", path: "/activity", icon: <Activity size={18} /> },
+        { name: "Home", path: "/", icon: "https://img.icons8.com/3d-plastilina/69/home--v2.png"},
+        { name: "Notepad", path: "/notepad", icon: "https://img.icons8.com/3d-fluency/94/ball-point-pen.png"},
+        { name: "Diary", path: "/diary", icon: "https://img.icons8.com/3d-fluency/94/timetable.png" },
+        { name: "Activity", path: "/activity", icon:"https://img.icons8.com/3d-fluency/94/increase.png" },
     ];
 
     return (
@@ -38,7 +38,8 @@ const Navbar = () => {
                                     : "text-gray-700 hover:bg-gray-200"
                                 }`}
                         >
-                            {item.icon}
+                            <img  className="w-10 h-10"
+                            src={item.icon} alt="" />
                             {item.name}
                         </Link>
                     ))}
