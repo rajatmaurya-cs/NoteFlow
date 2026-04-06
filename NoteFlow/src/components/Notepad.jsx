@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import JoditEditor from "jodit-react";
-
+import { Notes } from "./mockData";
 const Notepad = () => {
 
 
@@ -21,12 +21,12 @@ const Notepad = () => {
 
                 value={content}
                 config={config}
-                onBlur={(newContent) => setContent(newContent)}
+                onChange={(e)=>setContent(e.target.value)}
             />
 
             <div className="flex items-center justify-center space-x-6 mt-10">
                 <button
-                    onClick={() => console.log(content)}
+                    onClick={(e) => handlesubmit(e)}
                     className="px-6 py-3 bg-blue-700 text-white rounded-2xl"
                 >
                     Submit
