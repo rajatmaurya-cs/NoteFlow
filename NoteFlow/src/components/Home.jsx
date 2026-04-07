@@ -1,11 +1,45 @@
-import React from "react";
-import { Notes } from "./mockData";
+import React from 'react';
 
-const Home = ({Home}) => {
+const Home = ({ data }) => {
   return (
-    
-    <div className="">
-    
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {data?.length > 0 ? (
+        data.map((item) => (
+          <div
+            key={item.id}
+            className="bg-white shadow-lg rounded-xl p-4 hover:shadow-2xl transition-shadow duration-300"
+          >
+            {/* Subject */}
+            <div className="text-sm font-medium text-indigo-600 mb-1">
+              {item.subject}
+            </div>
+
+            {/* Title */}
+            <div className="text-lg font-semibold text-gray-800 mb-2">
+              {item.title}
+            </div>
+
+            {/* Description */}
+            <div className="text-sm text-gray-600 mb-3 line-clamp-3">
+              {item.description}
+            </div>
+
+            {/* Date & Published */}
+            <div className="flex justify-between items-center text-xs text-gray-500">
+              <span>{item.date}</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-white text-[10px] ${
+                  item.published ? 'bg-green-500' : 'bg-red-500'
+                }`}
+              >
+                {item.published ? 'Published' : 'Draft'}
+              </span>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div>No notes available</div>
+      )}
     </div>
   );
 };

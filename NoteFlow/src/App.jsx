@@ -5,6 +5,9 @@ import Navbar from './components/Navbar'
 import Header from './components/Header'
 import Notepad from './components/Notepad'
 import Activity from './components/Activity'
+
+import Storage from './components/Animation/Storage'
+
 function App() {
 
 
@@ -21,7 +24,7 @@ function App() {
 
     
 
-    <Route path = '/' element = {<Home/>}/>
+    <Route path = '/' element = {<Storage/>}/>
 
     <Route path = '/Header' element = {<Header/>}/>
 
