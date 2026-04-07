@@ -1,7 +1,7 @@
 import React from "react";
 import { Notes } from "./mockData";
 
-const Home = () => {
+const Home = ({Home}) => {
   return (
     
     <div className="">
