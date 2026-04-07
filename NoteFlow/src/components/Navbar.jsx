@@ -1,53 +1,52 @@
+import { Link, useLocation } from "react-router-dom";
+import Logo from "../assets/Logo.png";
+import Robot from "./Animation/Robot";
 
-import { Link } from "react-router-dom";
-import { Menu, X, Home, Book, Notebook, Activity } from "lucide-react";
-
-import { useState } from "react";
+const navItems = [
+  { name: "Home", path: "/", icon: "https://img.icons8.com/3d-plastilina/69/home--v2.png" },
+  { name: "Notepad", path: "/notepad", icon: "https://img.icons8.com/3d-fluency/94/ball-point-pen.png" },
+  { name: "Diary", path: "/diary", icon: "https://img.icons8.com/3d-fluency/94/timetable.png" },
+  { name: "Activity", path: "/activity", icon: "https://img.icons8.com/3d-fluency/94/increase.png" },
+];
 
 const Navbar = () => {
+  const location = useLocation();
 
-    const [active, setActive] = useState("/");
+  return (
+    <div className="w-full flex items-center justify-center mt-1 px-4">
 
+       <Robot/>
+      
+      <nav className="flex items-center gap-4 bg-gray-200 px-5 h-16 rounded-3xl shadow-sm w-fit">
 
-    const navItems = [
-        { name: "Home", path: "/", icon: "https://img.icons8.com/3d-plastilina/69/home--v2.png"},
-        { name: "Notepad", path: "/notepad", icon: "https://img.icons8.com/3d-fluency/94/ball-point-pen.png"},
-        { name: "Diary", path: "/diary", icon: "https://img.icons8.com/3d-fluency/94/timetable.png" },
-        { name: "Activity", path: "/activity", icon:"https://img.icons8.com/3d-fluency/94/increase.png" },
-    ];
+        {/* ✅ LOGO */}
+      
 
-    return (
-        <div className="w-full flex justify-center mt-4 px-4">
-            <nav className="w-full max-w-7xl bg-gray-100 text-black shadow-lg rounded-2xl px-6 py-3 flex items-center justify-between sticky top-0 z-50 ">
+        {/* ✅ NAV ITEMS */}
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.path;
 
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`
+                flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200
+                ${isActive
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-700 hover:bg-gray-300"}
+              `}
+            >
+              <img src={item.icon} alt="" className="h-10 w-10" />
+              <span className="text-3xl">{item.name}</span>
+            </Link>
+          );
+        })}
 
-                <h1 className="text-2xl font-bold tracking-wide">
-                    MyApp
-                </h1>
+      </nav>
 
-
-                <div className="hidden md:flex items-center gap-8">
-                    {navItems.map((item, index) => (
-                        <Link
-                            key={index}
-                            to={item.path}
-                            onClick={() => setActive(item.path)}
-                            className={`flex items-center gap-2 px-3 py-1 rounded-3xl transition-all duration-200
-                                     ${active === item.path
-                                    ? "bg-blue-700 text-white"
-                                    : "text-gray-700 hover:bg-gray-200"
-                                }`}
-                        >
-                            <img  className="w-10 h-10"
-                            src={item.icon} alt="" />
-                            {item.name}
-                        </Link>
-                    ))}
-                </div>
-
-            </nav>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Navbar;
