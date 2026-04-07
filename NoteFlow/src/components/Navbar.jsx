@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="w-full flex items-center justify-center mt-1 px-4">
 
-       <Robot/>
+      
       
       <nav className="flex items-center gap-4 bg-gray-200 px-5 h-16 rounded-3xl shadow-sm w-fit">
 
