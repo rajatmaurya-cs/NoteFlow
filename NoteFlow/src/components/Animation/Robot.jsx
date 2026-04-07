@@ -24,177 +24,158 @@ const Robot = () => {
       </div>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
+  display: inline-block; /* Only takes space of robot */
+  
   .modelViewPort {
-    /* The black circle background around the model*/
-    perspective: 1000px;
-    width: 20rem;
+    width: 22rem;
     aspect-ratio: 1;
     border-radius: 50%;
+    background: linear-gradient(145deg, #0c0c0c, #111);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.25), inset 0 0 20px #0ff;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
     overflow: hidden;
+    transform-style: preserve-3d;
   }
+
   .eva {
     --EVA-ROTATION-DURATION: 4s;
     transform-style: preserve-3d;
-    animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+    animation: rotateRight var(--EVA-ROTATION-DURATION) ease-in-out infinite alternate;
   }
+
+  /* --- Head, eyes, body, hands, scanner same as previous version --- */
   .head {
     position: relative;
-    width: 6rem;
-    height: 4rem;
-    border-radius: 48% 53% 45% 55% / 79% 79% 20% 22%;
-    background: linear-gradient(to right, white 45%, gray);
+    width: 6.5rem;
+    height: 4.2rem;
+    border-radius: 48% 52% 45% 55% / 78% 79% 22% 23%;
+    background: linear-gradient(145deg, #f0f0f0 20%, #888 80%);
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3), inset 0 0 10px #0ff;
   }
+
   .eyeChamber {
-    width: 4.5rem;
-    height: 2.75rem;
+    width: 4.8rem;
+    height: 2.8rem;
     position: relative;
     left: 50%;
     top: 55%;
     border-radius: 45% 53% 45% 48% / 62% 59% 35% 34%;
-    background-color: #0c203c;
-    box-shadow: 0px 0px 2px 2px white, inset 0px 0px 0px 2px black;
+    background-color: #001f3f;
+    box-shadow: 0 0 3px 2px cyan, inset 0 0 5px #0ff;
     transform: translate(-50%, -50%);
-    animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+    animation: moveRight var(--EVA-ROTATION-DURATION) ease-in-out infinite alternate;
   }
+
   .eye {
-    width: 1.2rem;
+    width: 1.3rem;
     height: 1.5rem;
     position: absolute;
     border-radius: 50%;
+    box-shadow: 0 0 15px #0ff, inset 0 0 5px cyan;
   }
+
   .eye:first-child {
     left: 12px;
     top: 50%;
-    background: repeating-linear-gradient(
-      65deg,
-      #9bdaeb 0px,
-      #9bdaeb 1px,
-      white 2px
-    );
-    box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+    background: repeating-linear-gradient(65deg, #0ff 0px, #0ff 1px, #fff 2px);
     transform: translate(0, -50%) rotate(-65deg);
   }
+
   .eye:nth-child(2) {
     right: 12px;
     top: 50%;
-    background: repeating-linear-gradient(
-      -65deg,
-      #9bdaeb 0px,
-      #9bdaeb 1px,
-      white 2px
-    );
-    box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+    background: repeating-linear-gradient(-65deg, #0ff 0px, #0ff 1px, #fff 2px);
     transform: translate(0, -50%) rotate(65deg);
   }
+
   .body {
-    width: 6rem;
+    width: 6.5rem;
     height: 8rem;
-    position: relative;
-    margin-block-start: 0.25rem;
+    margin-top: 0.3rem;
     border-radius: 47% 53% 45% 55% / 12% 9% 90% 88%;
-    background: linear-gradient(to right, white 35%, gray);
+    background: linear-gradient(145deg, #222, #000);
+    box-shadow: 0 0 20px #0ff, inset 0 0 10px cyan;
+    position: relative;
   }
+
   .hand {
     position: absolute;
-    left: -1.5rem;
-    top: 0.75rem;
     width: 2rem;
     height: 5.5rem;
     border-radius: 40%;
-    background: linear-gradient(to left, white 15%, gray);
-    box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.25);
-    transform: rotateY(55deg) rotateZ(10deg);
+    background: linear-gradient(to bottom, #0ff, #00bcd4);
+    box-shadow: 0 0 10px cyan, 0 5px 20px rgba(0, 255, 255, 0.5);
   }
+
   .hand:first-child {
-    animation: compensateRotation var(--EVA-ROTATION-DURATION) linear infinite
-      alternate;
+    left: -1.5rem;
+    top: 0.75rem;
+    transform: rotateY(55deg) rotateZ(10deg);
+    animation: compensateRotation var(--EVA-ROTATION-DURATION) ease-in-out infinite alternate;
   }
+
   .hand:nth-child(2) {
     left: 92%;
-    background: linear-gradient(to right, white 15%, gray);
+    top: 0.75rem;
     transform: rotateY(55deg) rotateZ(-10deg);
-    animation: compensateRotationRight var(--EVA-ROTATION-DURATION) linear
-      infinite alternate;
+    animation: compensateRotationRight var(--EVA-ROTATION-DURATION) ease-in-out infinite alternate;
   }
+
   .scannerThing {
     width: 0;
     height: 0;
     position: absolute;
     left: 60%;
     top: 10%;
-    border-top: 180px solid #9bdaeb;
+    border-top: 180px solid #0ff;
     border-left: 250px solid transparent;
     border-right: 250px solid transparent;
     transform-origin: top left;
     mask: linear-gradient(to right, white, transparent 35%);
     animation: glow 2s cubic-bezier(0.86, 0, 0.07, 1) infinite;
   }
+
   .scannerOrigin {
     position: absolute;
-    width: 8px;
+    width: 10px;
     aspect-ratio: 1;
     border-radius: 50%;
     left: 60%;
     top: 10%;
-    background: #9bdaeb;
-    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
-    animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite;
+    background: #0ff;
+    box-shadow: 0 0 15px cyan, inset 0 0 5px #0ff;
+    animation: moveRight var(--EVA-ROTATION-DURATION) ease-in-out infinite;
   }
+
+  /* --- Keyframes remain the same --- */
   @keyframes rotateRight {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(25deg);
-    }
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(25deg); }
   }
   @keyframes moveRight {
-    from {
-      transform: translate(-50%, -50%);
-    }
-    to {
-      transform: translate(-40%, -50%);
-    }
+    0% { transform: translate(-50%, -50%); }
+    100% { transform: translate(-40%, -50%); }
   }
   @keyframes compensateRotation {
-    from {
-      transform: rotateY(55deg) rotateZ(10deg);
-    }
-    to {
-      transform: rotatey(30deg) rotateZ(10deg);
-    }
+    0% { transform: rotateY(55deg) rotateZ(10deg); }
+    100% { transform: rotateY(30deg) rotateZ(10deg); }
   }
   @keyframes compensateRotationRight {
-    from {
-      transform: rotateY(55deg) rotateZ(-10deg);
-    }
-    to {
-      transform: rotateY(70deg) rotateZ(-10deg);
-    }
+    0% { transform: rotateY(55deg) rotateZ(-10deg); }
+    100% { transform: rotateY(70deg) rotateZ(-10deg); }
   }
   @keyframes glow {
-    from {
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    45% {
-      transform: rotate(-25deg);
-    }
-    75% {
-      transform: rotate(5deg);
-    }
-    100% {
-      opacity: 0;
-    }
-  }`;
+    0% { opacity: 0; }
+    20% { opacity: 1; transform: rotate(0deg); }
+    45% { transform: rotate(-25deg); }
+    75% { transform: rotate(5deg); }
+    100% { opacity: 0; }
+  }
+`;
 
 export default Robot;
