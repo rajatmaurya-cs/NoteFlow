@@ -28,6 +28,10 @@ const Notepad = () => {
     }), []);
 
     const handlesubmit = (e) => {
+        window.scrollBy({
+            top: -1000,   // negative value scrolls up
+            behavior: "smooth"
+        });
         e.preventDefault();
 
         if (title === '' && subject === '') {
@@ -47,7 +51,7 @@ const Notepad = () => {
 
         }
         const newItem = {
-            id: Math.random(), // ideally use uuid for real apps
+            id: Math.random(),
             subject: subject,
             title: title,
             date: date,
@@ -56,7 +60,7 @@ const Notepad = () => {
         };
 
         const oldData = JSON.parse(localStorage.getItem("myData")) || [];
-        const updatedData = [...oldData, newItem]; 
+        const updatedData = [...oldData, newItem];
         localStorage.setItem("myData", JSON.stringify(updatedData));
         toast.success("Note Added Successfully");
 
