@@ -1,12 +1,12 @@
 import React, { useState, useMemo ,useRef} from "react";
 import JoditEditor from "jodit-react";
-import { Notes } from "./mockData";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Robot from "./Animation/Robot";
 import toast from "react-hot-toast";
-
+import { Report } from 'notiflix';
 import Trash from '../assets/Trash2.png'
+import { htmlToText } from "html-to-text";
 
 const Notepad = () => {
 
@@ -19,7 +19,7 @@ const Notepad = () => {
 
     const [date, setDate] = useState(new Date());
 
-    // const [content, setContent] = useState("");
+   
 
     const [error, setError] = useState('');
 
@@ -54,14 +54,31 @@ const Notepad = () => {
             return;
 
         }
+     
         const editorData = editor.current.value;
+
+        const plainText = htmlToText(editorData).trim();
+
+        console.log(plainText);
+
+
+           if(plainText === ''){
+              Report.failure(
+                
+                  'Content required',
+                
+                );
+                return ;
+        }
+
+        console.log(date.toISOString().split('T')[0])
 
         const newItem = {
             id: Math.random(),
             subject: subject,
             title: title,
-            date: date,
-            description: editorData,
+            date: date.toISOString().split('T')[0],
+            description: plainText,
             published: true,
         };
 
