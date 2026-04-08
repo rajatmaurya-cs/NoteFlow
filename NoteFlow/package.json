@@ -10,10 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lexical/react": "^0.42.0",
     "@tailwindcss/vite": "^4.2.2",
     "@tinymce/tinymce-react": "^6.3.0",
+    "@tiptap/extension-image": "^3.22.3",
+    "@tiptap/extension-link": "^3.22.3",
+    "@tiptap/extension-placeholder": "^3.22.3",
+    "@tiptap/extension-table": "^3.22.3",
+    "@tiptap/extension-text-align": "^3.22.3",
+    "@tiptap/react": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
     "echarts-for-react": "^3.0.6",
+    "framer-motion": "^12.38.0",
     "jodit-react": "^5.3.21",
+    "lexical": "^0.42.0",
     "lucide-react": "^1.7.0",
     "react": "^19.2.4",
     "react-calendar": "^6.0.1",
@@ -22,7 +32,8 @@
     "react-router-dom": "^7.14.0",
     "recharts": "^3.8.1",
     "styled-components": "^6.3.12",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo ,useRef} from "react";
 import JoditEditor from "jodit-react";
 import { Notes } from "./mockData";
 import Calendar from "react-calendar";
@@ -7,7 +7,10 @@ import Robot from "./Animation/Robot";
 import toast from "react-hot-toast";
 
 import Trash from '../assets/Trash2.png'
+
 const Notepad = () => {
+
+    const editor = useRef(null);
 
 
 
@@ -16,7 +19,7 @@ const Notepad = () => {
 
     const [date, setDate] = useState(new Date());
 
-    const [content, setContent] = useState("");
+    // const [content, setContent] = useState("");
 
     const [error, setError] = useState('');
 
@@ -25,6 +28,7 @@ const Notepad = () => {
         readonly: false,
         placeholder: "Start typing...",
         height: 400,
+        direction: "ltr"
     }), []);
 
     const handlesubmit = (e) => {
@@ -50,12 +54,14 @@ const Notepad = () => {
             return;
 
         }
+        const editorData = editor.current.value;
+
         const newItem = {
             id: Math.random(),
             subject: subject,
             title: title,
             date: date,
-            description: content,
+            description: editorData,
             published: true,
         };
 
@@ -118,10 +124,10 @@ const Notepad = () => {
 
 
             <JoditEditor
-
-                value={content}
+                ref={editor}
+               
                 config={config}
-                onChange={(e) => setContent(e)}
+               
             />
 
 
@@ -135,7 +141,7 @@ const Notepad = () => {
 
 
                 <img
-                    onClick={() => setContent('')}
+                    onClick={() =>  editor.current.value = ''}
                     className="h-40 w-40 hover:cursor-pointer"
 
                     src={Trash} alt="" />
