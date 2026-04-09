@@ -132,7 +132,7 @@ const StyledWrapper = styled.div`
     position: absolute;
     left: 60%;
     top: 10%;
-    border-top: 180px solid #0ff;
+    border-top: 180px solid red;
     border-left: 250px solid transparent;
     border-right: 250px solid transparent;
     transform-origin: top left;

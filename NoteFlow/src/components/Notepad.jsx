@@ -8,6 +8,7 @@ import { Report } from 'notiflix';
 import Trash from '../assets/Trash2.png'
 import { htmlToText } from "html-to-text";
 
+
 const Notepad = () => {
 
     const editor = useRef(null);
@@ -45,12 +46,12 @@ const Notepad = () => {
         }
 
         if (subject === '') {
-            setError("Subject filed required")
+            setError("subject")
             return;
 
         }
         if (title === '') {
-            setError("Title field is required")
+            setError("title")
             return;
 
         }

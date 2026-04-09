@@ -9,7 +9,7 @@ import Diary from './components/Diary'
 import Card from './components/Card'
 
 
-import Storage from './components/Animation/Storage'
+import Storage from './components/Storage'
 import Car from './components/Animation/Car'
 
 function App() {

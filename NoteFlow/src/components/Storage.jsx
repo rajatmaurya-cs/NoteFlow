@@ -1,6 +1,6 @@
 import React, { useEffect , useState} from 'react'
-import { Notes } from '../mockData';
-import Home from '../Home';
+import { Notes } from './mockData';
+import Home from './Home';
 const Storage = () => {
 
     const [data, setData] = useState([]);

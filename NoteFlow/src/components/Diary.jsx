@@ -6,6 +6,7 @@ import { Report } from 'notiflix';
 import { v4 as uuidv4 } from 'uuid';
 import Car from '../components/Animation/Car'
 import {useNavigate} from 'react-router-dom'
+import { LuMoveUpRight } from "react-icons/lu";
 
 
 
@@ -121,8 +122,8 @@ const Diary = () => {
 
 
 
-  <button onClick={()=>navigate('/notepad')} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
-    Go to Editor
+  <button onClick={()=>navigate('/notepad')} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center justify-center hover:bg-blue-600">
+    Go to Editor <span><LuMoveUpRight size ={30} /></span>
   </button>
 
 

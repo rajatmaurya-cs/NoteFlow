@@ -1,8 +1,13 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
+
+import Creators from './Animation/Creators';
+
 const Home = ({ data }) => {
   return (
     <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
       {data?.length > 0 ? (
         data.map((item) => (
           <Link to = {`/Card/${item.id}`}
@@ -40,6 +45,9 @@ const Home = ({ data }) => {
       ) : (
         <div>No notes available</div>
       )}
+
+   
+
     </div>
   );
 };
