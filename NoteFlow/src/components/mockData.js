@@ -37,7 +37,7 @@ Mastering these laws builds a strong base for advanced topics like dynamics and 
 
   {
     id: 3,
-    subject: "Mathematics",
+    subject: "Math",
     title: "Linear Algebra - Matrices",
     date: "2026-04-8",
     description: `Matrices are rectangular arrays of numbers arranged in rows and columns. 
@@ -73,7 +73,7 @@ Mastering arrays is the first step toward advanced data structures.`,
 
   {
     id: 5,
-    subject: "Biology",
+    subject: "Bio",
     title: "Cell Structure",
     date: "2026-04-6",
     description: `The cell is the basic structural and functional unit of life. 

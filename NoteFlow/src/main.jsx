@@ -4,8 +4,11 @@ import './index.css'
 import App from './App.jsx'
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from 'react-router-dom'
+import AuthProvider from './components/AuthProvider.jsx'
 createRoot(document.getElementById('root')).render(
   
+  <AuthProvider>
+    
   <BrowserRouter>
 
   <StrictMode>
@@ -17,5 +20,7 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>
 
   </BrowserRouter>
+
+  </AuthProvider>
 
 )

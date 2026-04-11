@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { MdEditSquare } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { Report } from 'notiflix';
 import { v4 as uuidv4 } from 'uuid';
-import Car from '../components/Animation/Car'
 import {useNavigate} from 'react-router-dom'
 import { LuMoveUpRight } from "react-icons/lu";
+import Radio from './Animation/Radio';
+import { LoggedInContext } from "./AuthProvider";
 
 
 
 const Diary = () => {
 
+  const user = sessionStorage.getItem("user");
+
+  // const { user } = useContext(LoggedInContext)
   const navigate = useNavigate();
 
 
-  const [container, setcontainer] = useState([{ id: 1, task: "react" }, { id: 2, task: "javascript" }, { id: 3, task: "javaMOno" }]);
+  const [container, setcontainer] = useState([{ id: 1, task: "Larn React" }, { id: 2, task: "Laws of Motion" }, { id: 3, task: "HTML" }]);
 
   const [work, setwork] = useState('')
 
@@ -54,13 +58,22 @@ const Diary = () => {
 
   }
 
+    if (!user) return (
+
+        <div onClick={()=> navigate('/login')}
+        className="min-w-full min-h-screen flex justify-center items-center">
+
+            <Radio/>
+
+        </div>
+    )
  
 
   return (
 
-    < div className='w-full min-h-screen flex items-center justify-center '>
+    < div className='w-full min-h-screen flex items-center justify-center bg-gray-100 '>
 
-  <div className="flex flex-col min-h-screen w-full bg-gray-100 justify-start items-center p-10">
+  <div className="flex flex-col min-h-screen w-full bg-gray-100 justify-start items-center p-10 mt-20">
 
       {/* Main Heading */}
       <h1 className="text-blue-600 text-5xl">

@@ -112,13 +112,7 @@ const Activity = () => {
         type: 'pie',
         radius: '50%',
         data: pie,
-        // data: [
-        //   { value: 1048, name: 'Search Engine' },
-        //   { value: 735, name: 'Direct' },
-        //   { value: 580, name: 'Email' },
-        //   { value: 484, name: 'Union Ads' },
-        //   { value: 300, name: 'Video Ads' }
-        // ],
+       
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -133,7 +127,7 @@ const Activity = () => {
   return (
     <div className="flex flex-col gap-10 p-6 bg-gray-50 rounded-2xl">
 
-      <div className="w-full h-80 bg-white rounded-xl shadow-md p-4">
+      <div className="w-full h-80 bg-white rounded-xl shadow-md p-4 mt-20">
         <ReactECharts option={option} style={{ height: "100%", width: "100%" }} />
       </div>
 

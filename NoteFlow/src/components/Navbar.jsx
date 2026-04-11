@@ -7,22 +7,23 @@ const navItems = [
   { name: "Notepad", path: "/notepad", icon: "https://img.icons8.com/3d-fluency/94/ball-point-pen.png" },
   { name: "Diary", path: "/diary", icon: "https://img.icons8.com/3d-fluency/94/timetable.png" },
   { name: "Activity", path: "/activity", icon: "https://img.icons8.com/3d-fluency/94/increase.png" },
+  { name: "Actions", path: "/actions", icon: "https://img.icons8.com/color/48/filled-trash.png" },
 ];
 
 const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className="w-full flex items-center justify-center mt-1 px-4">
+    <div className="fixed top-0 left-0 w-full z-50 flex items-center justify-center mt-2 px-4">
 
       
       
-      <nav className="flex items-center gap-4 bg-gray-200 px-5 h-16 rounded-3xl shadow-sm w-fit">
+      <nav className="flex items-center gap-4 bg-white px-5 h-16 rounded-3xl shadow-sm w-auto">
 
-        {/* ✅ LOGO */}
+    
       
 
-        {/* ✅ NAV ITEMS */}
+     
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
 
