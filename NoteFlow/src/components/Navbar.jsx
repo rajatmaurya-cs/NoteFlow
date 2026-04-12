@@ -38,15 +38,12 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[100] flex items-center justify-center mt-2 px-4">
+    <div className={Theme === 'Dark'?"fixed top-0 left-0 w-full z-[100] flex items-center justify-center mt-2 px-4":"fixed top-0 left-0 w-full z-[100] flex items-center justify-center mt-0 px-4"}>
 
 
-      <div className="flex bg-white items-center rounded-2xl">
+      <div className="flex  items-center rounded-2xl">
 
-        <nav className="flex items-center gap-4 bg-white px-5 h-20 rounded-3xl  w-auto">
-
-
-
+        <nav className="flex items-center gap-4 bg-blue-200 px-5 h-20 rounded-3xl  w-auto">
 
 
           {navItems.map((item) => {

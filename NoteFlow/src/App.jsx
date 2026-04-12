@@ -12,7 +12,8 @@ import Actions from './components/Actions';
 import Storage from './components/Storage';
 import LogIn from './components/LogIn';
 import Practice from './components/Practice';
-import Day from './components/Animation/Day'
+import Pan from './components/Animation/Pan'
+import Wall from './components/Animation/Pattern';
 import Night from './components/Animation/Night'
 
 function App() {
@@ -28,7 +29,11 @@ function App() {
           < Night/>
         </div>
       )}
-     
+     {/* {Theme === "Light" && (
+        <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+          <Wall />
+        </div>
+      )} */}
 
    
       <main>

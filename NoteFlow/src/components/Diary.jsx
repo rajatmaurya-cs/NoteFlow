@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { LuMoveUpRight } from "react-icons/lu";
 import Radio from './Animation/Radio';
-import Wall from './Animation/Wall';
+import Wall from './Animation/Pattern';
 import { ToggleTheme } from './AuthProvider';
 
 const Diary = () => {
@@ -64,7 +64,7 @@ const Diary = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gray-300 dark:bg-transparent">
+    <div className={Theme === 'Light'?"bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200":"w-full min-h-screen flex items-center justify-center bg-gray-100 dark:bg-transparent"}>
 
 
       <div className="flex flex-col min-h-screen w-full justify-start items-center p-10 mt-20 relative z-10">
@@ -87,7 +87,7 @@ const Diary = () => {
             placeholder="Enter Task"
             value={work}
             onChange={(e) => setWork(e.target.value)}
-            className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50 backdrop-blur-md focus:outline-none"
+            className="w-full p-3 rounded-xl border border-gray-100 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50 backdrop-blur-md focus:outline-none"
           />
 
           <button

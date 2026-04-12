@@ -19,7 +19,7 @@ const Notepad = () => {
   const editor = useRef(null);
   const { Theme } = useContext(ToggleTheme);
 
-  const [subject, setSubject] = useState('');
+  const [subject, setSubject] = useState('ALL');
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date());
   const [error, setError] = useState('');
@@ -40,6 +40,11 @@ const Notepad = () => {
   }), [Theme]);
 
   const handleSubmit = (e) => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
     e.preventDefault();
 
     if (!title && !subject) {
@@ -100,23 +105,23 @@ const Notepad = () => {
   }
 
   return (
-    
 
-        <div className={Theme ==='Light'?"min-h-screen flex flex-col items-center space-y-8 p-6 bg-white/70 backdrop-blur":"min-h-screen flex flex-col items-center space-y-8 p-6 bg-gray-500 dark:bg-transparent border-4"}>
+
+    <div className={Theme === 'Light' ? "min-h-screen flex flex-col items-center space-y-8 p-6 bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200" : "min-h-screen flex flex-col items-center space-y-8 p-6 bg-gray-500 dark:bg-transparent border-4"}>
 
 
       <div className="w-full max-w-5xl mt-20 ">
 
-     
+
         <div className={`flex ${error ? "justify-between" : "justify-center gap-6"} items-center flex-wrap`}>
 
           {error && <Robot />}
 
-      
+
           <form className="flex flex-col space-y-3 items-center">
 
             <select
-              className="border p-2 rounded-xl w-[200px] bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-600 focus:outline-none"
+              className="border p-2 rounded-xl w-[200px] bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-600 focus:outline-none text-white"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
             >
@@ -127,11 +132,10 @@ const Notepad = () => {
             </select>
 
             <input
-              className={`p-2 rounded-xl border ${
-                error === 'title' || error === 'Both'
+              className={`p-2 rounded-xl border ${error === 'title' || error === 'Both'
                   ? "border-red-500"
                   : "border-gray-300 dark:border-gray-600"
-              } bg-gray-200 dark:bg-gray-800/50 text-black dark:text-white focus:outline-none`}
+                } bg-gray-200 dark:bg-gray-800/50 text-black dark:text-white focus:outline-none`}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter Title"
@@ -140,19 +144,19 @@ const Notepad = () => {
 
           </form>
 
-        
+
           <div className="bg-white/80 dark:bg-gray-800/50 rounded-xl p-2 backdrop-blur-md">
             <Calendar onChange={setDate} value={date} />
           </div>
 
         </div>
 
- 
+
         <div className="mt-6 rounded-xl overflow-hidden">
           <JoditEditor ref={editor} config={config} />
         </div>
 
-        
+
         <div className="flex justify-between items-center mt-6">
 
           <button

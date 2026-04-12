@@ -65,7 +65,7 @@ const LogIn = () => {
 
   <div className={`w-full max-w-md rounded-2xl shadow-md p-8 flex flex-col justify-center
     ${Theme === "Light"
-      ? "bg-white/90 border border-blue-100"
+      ? "bg-blue-200 border border-blue-100"
       : "bg-white/10 backdrop-blur-xl border border-white/10 text-white"
     }`}>
 
@@ -82,7 +82,7 @@ const LogIn = () => {
         placeholder="Email"
         className={`w-full p-3 rounded-lg border-2 focus:outline-none
           ${Theme === "Light"
-            ? "border-green-500"
+            ? "border-green-500 border-4"
             : "border-white/30 bg-white/10 text-white"
           }`}
       />
@@ -94,7 +94,7 @@ const LogIn = () => {
         placeholder="Password"
         className={`w-full p-3 rounded-lg border-2 focus:outline-none
           ${Theme === "Light"
-            ? "border-yellow-400"
+            ? "border-yellow-400 border-4"
             : "border-white/30 bg-white/10 text-white"
           }`}
       />

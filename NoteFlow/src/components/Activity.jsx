@@ -45,7 +45,7 @@ const Activity = () => {
   const isLight = Theme === "Light";
 
   // 🔥 GLASS CONTAINER (no solid bg)
-  const containerClass = `flex flex-col gap-8 p-6 min-h-screen transition-all duration-300`;
+  const containerClass = Theme === 'Light'?"bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 flex flex-col gap-8 p-6 min-h-screen":"flex flex-col gap-8 p-6 min-h-screen transition-all duration-300"
 
   // 🔥 GLASS CARD
   const cardClass = `w-full h-80 rounded-2xl p-4 transition-all duration-300
