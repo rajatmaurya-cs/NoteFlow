@@ -1,6 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import Logo from "../assets/Logo.png";
-import Robot from "./Animation/Robot";
+
+import Switch from "./Animation/Switch";
+
+import { ToggleTheme } from "./AuthProvider";
+
+import { useContext } from "react";
 
 const navItems = [
   { name: "Home", path: "/", icon: "https://img.icons8.com/3d-plastilina/69/home--v2.png" },
@@ -11,40 +15,73 @@ const navItems = [
 ];
 
 const Navbar = () => {
+
+  const { Theme, setTheme } = useContext(ToggleTheme)
+
+
+
+  const toggle = () => {
+
+    console.log("Theme is: ", Theme)
+    console.log("Entere ind toggle")
+
+    setTheme(prev => prev === 'Light' ? 'Dark' : 'Light')
+
+
+
+  };
+
+
+
+
+
   const location = useLocation();
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex items-center justify-center mt-2 px-4">
+    <div className="fixed top-0 left-0 w-full z-[100] flex items-center justify-center mt-2 px-4">
 
-      
-      
-      <nav className="flex items-center gap-4 bg-white px-5 h-16 rounded-3xl shadow-sm w-auto">
 
-    
-      
+      <div className="flex bg-white items-center rounded-2xl">
 
-     
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.path;
+        <nav className="flex items-center gap-4 bg-white px-5 h-20 rounded-3xl  w-auto">
 
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`
+
+
+
+
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path;
+
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`
                 flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200
                 ${isActive
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-700 hover:bg-gray-300"}
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "text-gray-700 hover:bg-gray-300"}
               `}
-            >
-              <img src={item.icon} alt="" className="h-10 w-10" />
-              <span className="text-3xl">{item.name}</span>
-            </Link>
-          );
-        })}
+              >
+                <img src={item.icon} alt="" className="h-10 w-10" />
+                <span className="text-3xl">{item.name}</span>
+              </Link>
+            );
+          })}
 
-      </nav>
+        </nav>
+
+        <Switch
+          // checked={Theme === 'Dark'}
+          onChange={toggle}
+        />
+
+
+
+
+      </div>
+
+
 
     </div>
   );

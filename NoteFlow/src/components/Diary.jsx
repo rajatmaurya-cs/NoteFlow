@@ -1,152 +1,147 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { MdEditSquare } from "react-icons/md";
 import { IoIosSave } from "react-icons/io";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { Report } from 'notiflix';
 import { v4 as uuidv4 } from 'uuid';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { LuMoveUpRight } from "react-icons/lu";
 import Radio from './Animation/Radio';
-import { LoggedInContext } from "./AuthProvider";
-
-
+import Wall from './Animation/Wall';
+import { ToggleTheme } from './AuthProvider';
 
 const Diary = () => {
 
   const user = sessionStorage.getItem("user");
-
-  // const { user } = useContext(LoggedInContext)
+  const { Theme } = useContext(ToggleTheme);
   const navigate = useNavigate();
 
+  const [container, setContainer] = useState([
+    { id: 1, task: "Learn React" },
+    { id: 2, task: "Laws of Motion" },
+    { id: 3, task: "HTML" }
+  ]);
 
-  const [container, setcontainer] = useState([{ id: 1, task: "Larn React" }, { id: 2, task: "Laws of Motion" }, { id: 3, task: "HTML" }]);
-
-  const [work, setwork] = useState('')
-
-  
-
-
+  const [work, setWork] = useState('');
 
   const handleEdit = (itemId) => {
-    const res = container.filter((itr) => itr.id === itemId);
-    setwork(res[0].task);
-    const newData = container.filter((item) => itemId != item.id);
-    setcontainer(newData)
-}
+    const res = container.find((itr) => itr.id === itemId);
+    setWork(res.task);
+    const newData = container.filter((item) => item.id !== itemId);
+    setContainer(newData);
+  };
 
-  const handlesubmit = () => {
+  const handleSubmit = () => {
+    if (!work.trim()) return;
+
     const newTask = {
       id: uuidv4(),
       task: work,
-    }
+    };
 
-    setcontainer([...container, newTask])
+    setContainer([...container, newTask]);
 
-    Report.success(
-      'Task Added Successfully',
+    Report.success('Task Added Successfully');
+
+    setWork('');
+  };
+
+  const handleDelete = (itemId) => {
+    const res = container.filter((item) => item.id !== itemId);
+    setContainer(res);
+  };
+
+  // 🔒 Login check
+  if (!user) {
+    return (
+      <div
+        onClick={() => navigate('/login')}
+        className="min-w-full min-h-screen flex justify-center items-center"
+      >
+        <Radio />
+      </div>
     );
-
-    setwork('')
-
   }
-  
-  const handledelete = (itemId)=>{
-
-      const res = container.filter((item)=>item.id!=itemId);
-
-      setcontainer(res);
-
-  }
-
-    if (!user) return (
-
-        <div onClick={()=> navigate('/login')}
-        className="min-w-full min-h-screen flex justify-center items-center">
-
-            <Radio/>
-
-        </div>
-    )
- 
 
   return (
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-300 dark:bg-transparent">
 
-    < div className='w-full min-h-screen flex items-center justify-center bg-gray-100 '>
 
-  <div className="flex flex-col min-h-screen w-full bg-gray-100 justify-start items-center p-10 mt-20">
+      <div className="flex flex-col min-h-screen w-full justify-start items-center p-10 mt-20 relative z-10">
 
-      {/* Main Heading */}
-      <h1 className="text-blue-600 text-5xl">
-        Manage 
-        <span className='animate-pulse text-green-500'> Your </span>
-        Tasks Easily
-      </h1>
+        {/* Heading */}
+        <h1 className="text-blue-600 text-5xl text-center">
+          Manage
+          <span className='animate-pulse text-green-500'> Your </span>
+          Tasks Easily
+        </h1>
 
-      <h1 className="text-blue-600 text-5xl  mb-5"> Create Edit   <span className='text-green-500 animate-pulse'> & </span> Organize</h1>
+        <h1 className="text-blue-600 text-5xl mb-6 text-center">
+          Create Edit <span className='text-green-500 animate-pulse'> & </span> Organize
+        </h1>
 
-      {/* Input + Save Button */}
-      <div className="flex items-center justify-center space-x-4 mb-8 w-full max-w-2xl">
-        <input
-          type="text"
-          placeholder="Enter Task"
-          value={work}
-          onChange={(e) => setwork(e.target.value)}
-          className="w-full p-3 rounded-xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-        />
+        {/* Input */}
+        <div className="flex items-center justify-center space-x-4 mb-8 w-full max-w-2xl">
+          <input
+            type="text"
+            placeholder="Enter Task"
+            value={work}
+            onChange={(e) => setWork(e.target.value)}
+            className="w-full p-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50 backdrop-blur-md focus:outline-none"
+          />
+
+          <button
+            onClick={handleSubmit}
+            className="text-green-500 hover:text-blue-600 transition"
+          >
+            <IoIosSave size={40} />
+          </button>
+        </div>
+
+        {/* Task Container */}
+        <div className="w-full max-w-3xl bg-white/80 dark:bg-gray-900/50 backdrop-blur-md p-6 rounded-3xl shadow-md flex flex-col space-y-4 border border-gray-200 dark:border-gray-700">
+
+          {container.map((item) => (
+            <div
+              key={item.id}
+              className="flex justify-between items-center bg-gray-50 dark:bg-gray-800/40 p-4 rounded-2xl transition"
+            >
+              <h2 className="text-gray-800 dark:text-gray-200 font-semibold text-lg">
+                {item.task}
+              </h2>
+
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleEdit(item.id)}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  <MdEditSquare size={30} />
+                </button>
+
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="text-black dark:text-gray-300 hover:text-red-600"
+                >
+                  <RiDeleteBin2Fill size={30} />
+                </button>
+              </div>
+            </div>
+          ))}
+
+        </div>
+
+        {/* Button */}
         <button
-          onClick={() => handlesubmit()}
-          className="text-green-500 hover:text-blue-600 hover:animate-pulse transition-colors"
+          onClick={() => navigate('/notepad')}
+          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center gap-2 hover:bg-blue-600"
         >
-          <IoIosSave size={40} />
+          Go to Editor <LuMoveUpRight size={24} />
         </button>
+
       </div>
 
-     {/* Task Container */}
-<div className="w-full max-w-3xl bg-white p-6 rounded-3xl shadow-lg flex flex-col space-y-4">
-  {container.map((item) => (
-    <div
-      key={item.id}
-      className="flex justify-between items-center bg-gray-50 p-4 rounded-2xl shadow hover:shadow-lg transition-shadow duration-200"
-    >
-      <h2 className="text-gray-800 font-semibold text-lg">{item.task}</h2>
-
-      <div className="flex space-x-4">
-        <button
-          onClick={() => handleEdit(item.id)}
-          className="text-blue-500 hover:text-blue-700 transition-colors"
-        >
-          <MdEditSquare size={30} />
-        </button>
-
-        <button
-        onClick={()=>handledelete(item.id)}
-          className="text-black hover:text-red-700 hover:animate-pulse transition-colors"
-        >
-          <RiDeleteBin2Fill size={30} />
-        </button>
-      </div>
     </div>
-  ))}
-
-  
-</div> 
-
-
-
-
-
-  <button onClick={()=>navigate('/notepad')} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center justify-center hover:bg-blue-600">
-    Go to Editor <span><LuMoveUpRight size ={30} /></span>
-  </button>
-
-
-    </div>
-
-     
-
-    </div>
-
   );
-}
+};
 
-export default Diary
+export default Diary;

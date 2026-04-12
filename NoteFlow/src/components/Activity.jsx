@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import ReactECharts from "echarts-for-react";
+import { ToggleTheme } from './AuthProvider';
 
 const Activity = () => {
 
-
+  const { Theme } = useContext(ToggleTheme);
 
   const [filteredNotes, setFilteredNotes] = useState([]);
-  const [words, setwords] = useState([]);
-  const [pie, setpie] = useState([])
+  const [words, setWords] = useState([]);
+  const [pie, setPie] = useState([]);
 
   function getLast7DaysNotes(notes) {
-
     const today = new Date();
-
     const sevenDaysAgo = new Date();
-
     sevenDaysAgo.setDate(today.getDate() - 7);
 
     return notes?.filter(note => {
@@ -23,34 +21,16 @@ const Activity = () => {
     });
   }
 
-
-
   useEffect(() => {
-
     const notes = JSON.parse(localStorage.getItem('myData')) || [];
-
-    console.log(notes)
-
     const result = getLast7DaysNotes(notes);
 
-    // Dates
-    const dates = result?.map((item) => item.date) || [];
+    setFilteredNotes(result?.map((item) => item.date) || []);
+    setWords(result?.map((item) => item.description.length) || []);
 
-    console.log(dates);
-
-    setFilteredNotes(dates);
-
-    // Words
-    const ans = result?.map((item) => item.description.length)
-    setwords(ans)
-    console.log(ans);
-
-    //mOBj
     const freqObj = {};
-
     for (let item of result) {
-      const subject = item.subject;
-      freqObj[subject] = (freqObj[subject] || 0) + 1;
+      freqObj[item.subject] = (freqObj[item.subject] || 0) + 1;
     }
 
     const arr = Object.entries(freqObj).map(([subject, count]) => ({
@@ -58,18 +38,24 @@ const Activity = () => {
       value: count
     }));
 
-    setpie(arr);
-    console.log(arr);
-
-
-
-
+    setPie(arr);
 
   }, []);
 
+  const isLight = Theme === "Light";
 
+  // 🔥 GLASS CONTAINER (no solid bg)
+  const containerClass = `flex flex-col gap-8 p-6 min-h-screen transition-all duration-300`;
 
+  // 🔥 GLASS CARD
+  const cardClass = `w-full h-80 rounded-2xl p-4 transition-all duration-300
+    ${isLight
+      ? "bg-white/80 backdrop-blur-md border border-gray-200 shadow-md"
+      : "bg-white/10 backdrop-blur-xl border border-white/10 shadow-lg text-white"
+    }`;
 
+  // 🔥 Chart theme adaptation
+  const textColor = isLight ? "#111" : "#eee";
 
   const option = {
     xAxis: {
@@ -77,47 +63,51 @@ const Activity = () => {
       data: filteredNotes,
       name: "Date",
       nameLocation: "middle",
-      nameGap: 25
+      nameGap: 25,
+      axisLabel: { color: textColor }
     },
     yAxis: {
       type: "value",
       name: "Words",
       nameLocation: "middle",
-      nameGap: 40
+      nameGap: 40,
+      axisLabel: { color: textColor }
     },
     series: [
       {
         data: words,
-        type: "line"
+        type: "line",
+        smooth: true
       }
     ]
   };
 
   const option2 = {
     title: {
-      text: 'Weightage Of subject',
-      subtext: 'Subject',
-      left: 'center'
+      text: 'Subject Distribution',
+      left: 'center',
+      textStyle: {
+        color: textColor
+      }
     },
     tooltip: {
       trigger: 'item'
     },
     legend: {
-      orient: 'vertical',
-      left: 'left'
+      bottom: 0,
+      textStyle: {
+        color: textColor
+      }
     },
     series: [
       {
-        name: 'Access From',
         type: 'pie',
-        radius: '50%',
+        radius: '55%',
         data: pie,
-       
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
+            shadowColor: 'rgba(0,0,0,0.3)'
           }
         }
       }
@@ -125,29 +115,18 @@ const Activity = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10 p-6 bg-gray-50 rounded-2xl">
+    <div className={containerClass}>
 
-      <div className="w-full h-80 bg-white rounded-xl shadow-md p-4 mt-20">
+      <div className={`${cardClass} mt-16`}>
         <ReactECharts option={option} style={{ height: "100%", width: "100%" }} />
       </div>
 
-
-      <div className="w-full h-80 bg-white rounded-xl shadow-md p-4">
+      <div className={cardClass}>
         <ReactECharts option={option2} style={{ height: "100%", width: "100%" }} />
       </div>
+
     </div>
   );
 };
 
-export default Activity
-
-
-
-/*
-
-date.getFullYear()   // 2026
-date.getMonth()      // 0–11
-date.getDate()       // 1–31
-date.getDay()        // 0–6 (Sunday–Saturday)
-
-*/
+export default Activity;

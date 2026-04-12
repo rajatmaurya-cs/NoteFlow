@@ -1,17 +1,17 @@
 import { createContext, useState } from "react";
 
 
-export const LoggedInContext = createContext(null);
+export const ToggleTheme = createContext(null);
 
 
 const LoggedInProvider = ({ children }) => {  
   
-  const [user, setUser] = useState(false);
+  const [Theme, setTheme] = useState('Light');
 
   return (
-    <LoggedInContext.Provider value={{ user, setUser }}>
+    <ToggleTheme.Provider value={{ Theme, setTheme }}>
       {children}
-    </LoggedInContext.Provider>
+    </ToggleTheme.Provider>
   );
 }
 
