@@ -1,31 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ToggleTheme } from "./AuthProvider";
 import { Link } from "react-router-dom";
+import { Notes } from "./mockData";
 
 export const subjects = [
   "All", "Chemistry", "Physics", "Math", "Bio",
   "English", "Hindi", "Computer Science", "Others",
 ];
 
-const Home = ({ data }) => {
+const Home = () => {
   const [search, setSearch] = useState("All");
   const { Theme } = useContext(ToggleTheme);
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("myData"));
+    if (savedData) {
+      setData(savedData);
+    } else {
+      setData(Notes);
+      localStorage.setItem("myData", JSON.stringify(Notes));
+    }
+  }, []);
 
   const isLight = Theme === "Light";
 
-  const filteredData = data?.filter(
+  const filteredData = Data?.filter(
     (item) =>
       search === "All" ||
       item.subject.toLowerCase() === search.toLowerCase()
   );
 
   return (
-    <div className={Theme === 'Light'?"min-h-screen bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200":"min-h-screen bg-transparent"}>
+    <div
+      className={
+        isLight
+          ? "min-h-screen bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 text-gray-800"
+          : "min-h-screen text-gray-100"
+      }
+    >
 
-      {/* 🔘 Filter Buttons */}
+      {/* 🔘 FILTER BAR */}
       <div className="w-full flex justify-center mt-40">
-        <div className="flex flex-wrap gap-2 justify-center">
-
+        <div
+          className={
+            isLight
+              ? "flex flex-wrap gap-3 justify-center p-4 rounded-2xl bg-white shadow-[inset_2px_2px_6px_rgba(0,0,0,0.08),_inset_-2px_-2px_6px_rgba(255,255,255,0.9)]"
+              : "flex flex-wrap gap-3 justify-center p-4 rounded-2xl bg-[#1f2026] shadow-[inset_3px_3px_10px_rgba(0,0,0,0.6),_inset_-3px_-3px_10px_rgba(255,255,255,0.05)]"
+          }
+        >
           {subjects.map((item) => {
             const isActive = search === item;
 
@@ -34,12 +57,15 @@ const Home = ({ data }) => {
                 key={item}
                 onClick={() => setSearch(item)}
                 className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border
-                  ${isActive
-                    ? "bg-indigo-600 text-white border-indigo-600 scale-105"
-                    : isLight
-                      ? "bg-white/70 backdrop-blur-md text-gray-700 border-gray-200 hover:text-indigo-600"
-                      : "bg-white/10 text-white border-white/10 hover:bg-white/20"
+                  px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200
+                  ${
+                    isLight
+                      ? isActive
+                        ? "bg-indigo-950 text-gray-900 shadow-[inset_3px_3px_8px_rgba(0,0,0,0.12),_inset_-3px_-3px_8px_rgba(255,255,255,1)] scale-[1.03] text-white"
+                        : "bg-[#f5f6f8] shadow-[3px_3px_8px_rgba(0,0,0,0.12),_-3px_-3px_8px_rgba(255,255,255,1)] hover:shadow-[inset_2px_2px_6px_rgba(0,0,0,0.1)]"
+                      : isActive
+                        ? "bg-gray-200 text-black shadow-[inset_3px_3px_8px_rgba(0,0,0,0.7),_inset_-3px_-3px_8px_rgba(255,255,255,0.05)] scale-[1.03]"
+                        : "bg-[#1f2026] text-gray-300 shadow-[4px_4px_10px_rgba(0,0,0,0.6),_-3px_-3px_8px_rgba(255,255,255,0.05)] hover:text-white"
                   }
                 `}
               >
@@ -47,103 +73,69 @@ const Home = ({ data }) => {
               </button>
             );
           })}
-
         </div>
       </div>
 
-      {/* 📚 Cards */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      {/* 📚 CARDS */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
 
         {filteredData && filteredData.length > 0 ? (
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
             {filteredData.map((item) => (
               <Link
                 to={`/Card/${item.id}`}
                 key={item.id}
-                className={`group block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1
-                  ${isLight
-                    ? "bg-white/70 backdrop-blur-md border border-gray-200 shadow-sm hover:shadow-xl"
-                    : "bg-white/10 backdrop-blur-xl border border-white/10 text-white hover:bg-white/20"
-                  }`}
+                className={
+                  isLight
+                    ? "block rounded-2xl bg-white p-6 shadow-[8px_8px_20px_rgba(0,0,0,0.12),_-6px_-6px_16px_rgba(255,255,255,1)] hover:shadow-[inset_4px_4px_12px_rgba(0,0,0,0.08),_inset_-4px_-4px_12px_rgba(255,255,255,1)] transition-all duration-300 hover:scale-[1.02]"
+                    : "block rounded-2xl bg-[#1f2026] p-6 shadow-[8px_8px_20px_rgba(0,0,0,0.7),_-3px_-3px_10px_rgba(255,255,255,0.05)] hover:shadow-[inset_5px_5px_12px_rgba(0,0,0,0.8),_inset_-3px_-3px_10px_rgba(255,255,255,0.05)] transition-all duration-300 hover:scale-[1.02]"
+                }
               >
 
-                {/* Top Gradient Bar */}
-                <div className="h-2 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <div className="p-6">
-
-                  {/* Subject + Date */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span
-                      className={`px-2.5 py-0.5 rounded-md text-xs font-medium
-                        ${isLight
-                          ? "bg-indigo-50 text-indigo-700 border border-indigo-100"
-                          : "bg-indigo-500/20 text-indigo-300 border border-indigo-400/20"
-                        }`}
-                    >
-                      {item.subject}
-                    </span>
-
-                    <span
-                      className={`text-xs ${
-                        isLight ? "text-gray-500" : "text-white/60"
-                      }`}
-                    >
-                      {item.date}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3
-                    className={`text-xl font-bold mb-2 transition-colors
-                      ${isLight ? "text-gray-900" : "text-white"}`}
+                {/* SUBJECT + DATE */}
+                <div className="flex justify-between items-center mb-4">
+                  <span
+                    className={
+                      isLight
+                        ? "px-3 py-1 text-xs font-semibold rounded-lg bg-[#f0f2f5] shadow-[inset_2px_2px_5px_rgba(0,0,0,0.08),_-2px_-2px_5px_rgba(255,255,255,1)]"
+                        : "px-3 py-1 text-xs font-semibold rounded-lg bg-[#2a2c35] text-gray-200 shadow-[inset_2px_2px_6px_rgba(0,0,0,0.6),_-2px_-2px_6px_rgba(255,255,255,0.05)]"
+                    }
                   >
-                    {item.title}
-                  </h3>
+                    {item.subject}
+                  </span>
 
-                  {/* CTA */}
-                  <div className="flex items-center text-indigo-500 text-sm font-semibold">
-                    Read Note →
-                  </div>
-
+                  <span className="text-xs text-gray-400">
+                    {item.date}
+                  </span>
                 </div>
+
+                {/* TITLE */}
+                <h3 className="text-xl font-bold mb-3">
+                  {item.title}
+                </h3>
+
+                {/* BUTTON */}
+                <div
+                  className={
+                    isLight
+                      ? "mt-6 inline-flex items-center px-4 py-2 rounded-xl font-semibold text-indigo-600 bg-white shadow-[4px_4px_10px_rgba(0,0,0,0.12),_-3px_-3px_8px_rgba(255,255,255,1)] hover:shadow-[inset_3px_3px_8px_rgba(0,0,0,0.1)] transition-all"
+                      : "mt-6 inline-flex items-center px-4 py-2 rounded-xl font-semibold text-indigo-300 bg-[#1f2026] shadow-[4px_4px_12px_rgba(0,0,0,0.7),_-3px_-3px_8px_rgba(255,255,255,0.05)] hover:shadow-[inset_3px_3px_10px_rgba(0,0,0,0.8)] transition-all"
+                  }
+                >
+                  Read Note →
+                </div>
+
               </Link>
             ))}
 
           </div>
-
         ) : (
-
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div
-              className={`${
-                isLight ? "bg-white/60" : "bg-white/10"
-              } backdrop-blur-md p-4 rounded-full mb-4`}
-            >
-              <svg
-                className="w-8 h-8 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  d="M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0"
-                />
-              </svg>
-            </div>
-
-            <h3
-              className={`${
-                isLight ? "text-gray-900" : "text-white"
-              } text-lg`}
-            >
+            <h3 className="text-lg font-semibold text-gray-400">
               No notes found
             </h3>
           </div>
-
         )}
 
       </div>

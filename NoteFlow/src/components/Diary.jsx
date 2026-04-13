@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { LuMoveUpRight } from "react-icons/lu";
 import Radio from './Animation/Radio';
-import Wall from './Animation/Pattern';
 import { ToggleTheme } from './AuthProvider';
 
 const Diary = () => {
@@ -27,8 +26,7 @@ const Diary = () => {
   const handleEdit = (itemId) => {
     const res = container.find((itr) => itr.id === itemId);
     setWork(res.task);
-    const newData = container.filter((item) => item.id !== itemId);
-    setContainer(newData);
+    setContainer(container.filter((item) => item.id !== itemId));
   };
 
   const handleSubmit = () => {
@@ -40,23 +38,19 @@ const Diary = () => {
     };
 
     setContainer([...container, newTask]);
-
     Report.success('Task Added Successfully');
-
     setWork('');
   };
 
   const handleDelete = (itemId) => {
-    const res = container.filter((item) => item.id !== itemId);
-    setContainer(res);
+    setContainer(container.filter((item) => item.id !== itemId));
   };
 
-  // 🔒 Login check
   if (!user) {
     return (
       <div
         onClick={() => navigate('/login')}
-        className="min-w-full min-h-screen flex justify-center items-center"
+        className="min-h-screen flex justify-center items-center"
       >
         <Radio />
       </div>
@@ -64,82 +58,139 @@ const Diary = () => {
   }
 
   return (
-    <div className={Theme === 'Light'?"bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200":"w-full min-h-screen flex items-center justify-center bg-gray-100 dark:bg-transparent"}>
+    <div
+      className={`min-h-screen w-full flex justify-center items-start pt-20
+      ${Theme === "Light" ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200" : "bg-transparent"}`}
+    >
 
-
-      <div className="flex flex-col min-h-screen w-full justify-start items-center p-10 mt-20 relative z-10">
+      <div className="w-full max-w-3xl flex flex-col items-center mt-20">
 
         {/* Heading */}
-        <h1 className="text-blue-600 text-5xl text-center">
-          Manage
-          <span className='animate-pulse text-green-500'> Your </span>
-          Tasks Easily
+        <h1 className={Theme === 'Light' ? "text-4xl font-semibold mb-8 text-center text-black" : "text-4xl font-semibold mb-8 text-center text-white"}>
+          Manage Your Task
         </h1>
 
-        <h1 className="text-blue-600 text-5xl mb-6 text-center">
-          Create Edit <span className='text-green-500 animate-pulse'> & </span> Organize
-        </h1>
+        {/* Input Section */}
+        <div
+          className={`flex items-center gap-4 p-4 rounded-2xl w-full mb-8
+          ${Theme === "Light"
+              ? "bg-[#e0e5ec] shadow-[8px_8px_15px_#a3b1c6,_-8px_-8px_15px_#ffffff]"
+              : "bg-[#1f2937] shadow-[6px_6px_12px_#0b1120,_-6px_-6px_12px_#374151]"
+            }`}
+        >
 
-        {/* Input */}
-        <div className="flex items-center justify-center space-x-4 mb-8 w-full max-w-2xl">
           <input
             type="text"
             placeholder="Enter Task"
             value={work}
             onChange={(e) => setWork(e.target.value)}
-            className="w-full p-3 rounded-xl border border-gray-100 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50 backdrop-blur-md focus:outline-none"
+            className={`
+              flex-1 px-4 py-2 rounded-xl focus:outline-none transition-all
+              
+              ${Theme === "Light"
+                ? `
+                  bg-[#e0e5ec]
+                  shadow-[inset_4px_4px_8px_#a3b1c6,_inset_-4px_-4px_8px_#ffffff]
+                `
+                : `
+                  bg-[#1f2937]
+                  shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151] text-white
+                `}
+            `}
           />
 
           <button
             onClick={handleSubmit}
-            className="text-green-500 hover:text-blue-600 transition"
+            className={`
+              p-3 rounded-xl transition-all
+              
+              ${Theme === "Light"
+                ? `
+                  bg-[#e0e5ec]
+                  shadow-[5px_5px_10px_#a3b1c6,_-5px_-5px_10px_#ffffff]
+                  active:shadow-[inset_4px_4px_8px_#a3b1c6,_inset_-4px_-4px_8px_#ffffff]
+                `
+                : `
+                  bg-[#1f2937]
+                  shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]
+                  active:shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151] text-white
+                `}
+            `}
           >
-            <IoIosSave size={40} />
+            <IoIosSave size={26} />
           </button>
+
         </div>
 
-        {/* Task Container */}
-        <div className="w-full max-w-3xl bg-white/80 dark:bg-gray-900/50 backdrop-blur-md p-6 rounded-3xl shadow-md flex flex-col space-y-4 border border-gray-200 dark:border-gray-700">
+        {/* Task List Container */}
+        <div
+          className={`
+            w-full p-6 rounded-2xl flex flex-col gap-4
+            
+            ${Theme === "Light"
+              ? "bg-[#e0e5ec] shadow-[10px_10px_20px_#a3b1c6,_-10px_-10px_20px_#ffffff]"
+              : "bg-[#1f2937] shadow-[8px_8px_15px_#0b1120,_-8px_-8px_15px_#374151]"
+            }
+          `}
+        >
 
           {container.map((item) => (
             <div
               key={item.id}
-              className="flex justify-between items-center bg-gray-50 dark:bg-gray-800/40 p-4 rounded-2xl transition"
+              className={`
+                flex justify-between items-center px-4 py-3 rounded-xl transition-all
+                
+                ${Theme === "Light"
+                  ? "bg-[#e0e5ec] shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]"
+                  : "bg-[#1f2937] shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]"
+                }
+              `}
             >
-              <h2 className="text-gray-800 dark:text-gray-200 font-semibold text-lg">
-                {item.task}
-              </h2>
 
-              <div className="flex space-x-4">
+              <h2 className={Theme === 'Light' ? "text-black" : "text-white"}>{item.task}</h2>
+
+              <div className="flex gap-3">
+
                 <button
                   onClick={() => handleEdit(item.id)}
-                  className="text-blue-500 hover:text-blue-700"
+                  className={
+                    Theme === "Light"
+                      ? "p-2 rounded-lg transition-all active:scale-90 text-black hover:bg-green-500"
+                      : "p-2 rounded-lg transition-all active:scale-90 text-white hover:bg-green-500"
+                  }
                 >
-                  <MdEditSquare size={30} />
+                  <MdEditSquare size={22} />
                 </button>
 
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="text-black dark:text-gray-300 hover:text-red-600"
+                  className={Theme === 'Light' ? "p-2 rounded-lg transition-all active:scale-90 hover:bg-red-500" : "p-2 rounded-lg transition-all active:scale-90 text-white hover:bg-red-500"}
                 >
-                  <RiDeleteBin2Fill size={30} />
+                  <RiDeleteBin2Fill size={22} />
                 </button>
+
               </div>
             </div>
           ))}
 
         </div>
 
-        {/* Button */}
+        {/* Navigation Button */}
         <button
           onClick={() => navigate('/notepad')}
-          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center gap-2 hover:bg-blue-600"
+          className={`
+            mt-6 px-6 py-3 rounded-xl flex items-center gap-2 transition-all
+            
+            ${Theme === "Light"
+              ? "bg-[#e0e5ec] shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]"
+              : "bg-[#1f2937] shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151] text-white"
+            }
+          `}
         >
-          Go to Editor <LuMoveUpRight size={24} />
+          Go to Editor <LuMoveUpRight size={20} />
         </button>
 
       </div>
-
     </div>
   );
 };

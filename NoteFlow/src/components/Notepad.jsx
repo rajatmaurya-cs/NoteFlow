@@ -83,6 +83,7 @@ const Notepad = () => {
     const oldData = JSON.parse(localStorage.getItem("myData")) || [];
     const updatedData = [...oldData, newItem];
     localStorage.setItem("myData", JSON.stringify(updatedData));
+    // localStorage.setItem("myData", JSON.stringify(editor.current.value));
 
     toast.success("Note Added Successfully");
     Report.success('Note Built Successfully');
@@ -90,6 +91,7 @@ const Notepad = () => {
     setTitle('');
     setSubject('');
     editor.current.value = '';
+
   };
 
 
@@ -121,7 +123,27 @@ const Notepad = () => {
           <form className="flex flex-col space-y-3 items-center">
 
             <select
-              className="border p-2 rounded-xl w-[200px] bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-600 focus:outline-none text-white"
+              className={`
+      w-[220px] px-4 py-2 rounded-xl focus:outline-none transition-all duration-300
+      
+      ${Theme === "Light"
+                  ? `
+          bg-[#e0e5ec] text-gray-700
+          shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
+          focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
+        `
+                  : `
+          bg-[#1f2937] text-white
+          shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
+          focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
+        `}
+      
+      ${error === 'title' || error === 'Both'
+                  ? "ring-2 ring-red-400 animate-pulse"
+                  : ""}
+    `}
+
+
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
             >
@@ -132,10 +154,28 @@ const Notepad = () => {
             </select>
 
             <input
-              className={`p-2 rounded-xl border ${error === 'title' || error === 'Both'
-                  ? "border-red-500"
-                  : "border-gray-300 dark:border-gray-600"
-                } bg-gray-200 dark:bg-gray-800/50 text-black dark:text-white focus:outline-none`}
+
+              className={`
+      w-[220px] px-4 py-2 rounded-xl focus:outline-none transition-all duration-300
+      
+      ${Theme === "Light"
+                  ? `
+          bg-[#e0e5ec] text-gray-700
+          shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
+          focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
+        `
+                  : `
+          bg-[#1f2937] text-white
+          shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
+          focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
+        `}
+      
+      ${error === 'title' || error === 'Both'
+                  ? "ring-2 ring-red-400 animate-pulse"
+                  : ""}
+    `}
+
+
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter Title"
@@ -145,8 +185,26 @@ const Notepad = () => {
           </form>
 
 
-          <div className="bg-white/80 dark:bg-gray-800/50 rounded-xl p-2 backdrop-blur-md">
-            <Calendar onChange={setDate} value={date} />
+          <div
+            className={`
+    p-4 rounded-2xl transition-all duration-300
+    
+    ${Theme === "Light"
+                ? `
+        bg-[#e0e5ec]
+        shadow-[inset_6px_6px_12px_#a3b1c6,_inset_-6px_-6px_12px_#ffffff]
+      `
+                : `
+        bg-[#1f2937]
+        shadow-[inset_5px_5px_10px_#0b1120,_inset_-5px_-5px_10px_#374151]
+      `}
+  `}
+          >
+            <Calendar
+              onChange={setDate}
+              value={date}
+              className="bg-transparent border-none w-full"
+            />
           </div>
 
         </div>

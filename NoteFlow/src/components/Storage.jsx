@@ -4,6 +4,7 @@ import Home from './Home';
 const Storage = () => {
 
     const [data, setData] = useState([]);
+    
     useEffect(() => {
     
     const savedData = JSON.parse(localStorage.getItem("myData"));

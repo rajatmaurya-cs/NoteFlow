@@ -23,12 +23,11 @@ const Actions = () => {
     setData(ans);
   };
 
-  // 🔴 If not logged in
   if (!user) {
     return (
       <div 
         onClick={() => navigate('/login')}
-        className="min-w-full min-h-screen flex justify-center items-center cursor-pointer"
+        className="min-h-screen flex justify-center items-center cursor-pointer"
       >
         <Radio />
       </div>
@@ -36,45 +35,65 @@ const Actions = () => {
   }
 
   return (
-    <div className="min-w-full min-h-screen flex items-center justify-center p-6">
+    <div
+      className={`min-h-screen w-full flex justify-center items-start pt-20 px-4
+      ${Theme === "Light" ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200" : ""}`}
+    >
 
-      {/* 🔥 Glass layer instead of solid bg */}
-      <div className={`w-full max-w-2xl space-y-4 mt-20 
-        ${Theme === 'Dark'
-          ? 'bg-white/10 backdrop-blur-xl border border-white/10'
-          : 'bg-white/80 backdrop-blur-md border border-gray-200'
-        } 
-        rounded-2xl p-4 shadow-lg`
-      }>
+     
+      <div
+        className={`
+          w-full max-w-2xl p-6 rounded-2xl flex flex-col gap-4 mt-10
+          
+          ${Theme === "Light"
+            ? "bg-[#e0e5ec] shadow-[10px_10px_20px_#a3b1c6,_-10px_-10px_20px_#ffffff]"
+            : " "
+          }
+        `}
+      >
 
+    
         {data.length === 0 && (
-          <p className={`text-center ${Theme === 'Dark' ? 'text-white/70' : 'text-gray-600'}`}>
+          <p className="text-center opacity-70">
             No items found
           </p>
         )}
 
+       
         {data.map((item) => (
           <div
             key={item.id}
-            className={`flex justify-between items-center border rounded-lg p-4 transition-all duration-300
-              ${Theme === 'Dark'
-                ? 'bg-white/10 border-white/10 text-white hover:bg-white/20'
-                : 'bg-white border-gray-200 text-gray-800 hover:shadow-md'
-              }`}
+            className={`
+              flex justify-between items-center px-4 py-3 rounded-xl transition-all
+              
+              ${Theme === "Light"
+                ? "bg-[#e0e5ec] shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]"
+                : "bg-[#1f2937] shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]"
+              }
+            `}
           >
+
+       
             <div className="flex flex-col">
-              <h1 className="text-lg font-semibold">{item.subject}</h1>
-              <h2 className={`${Theme === 'Dark' ? 'text-white/70' : 'text-gray-600'}`}>
-                {item.title}
-              </h2>
+              <h1 className={Theme === 'Light'?"font-semibold":"font-semibold text-white"}>{item.subject}</h1>
+              <h2 className={Theme === 'Light'?"opacity-70 text-sm":"text-white opacity-70 text-sm"}>{item.title}</h2>
             </div>
 
+           
             <button
               onClick={() => handleDelete(item.id)}
-              className="hover:text-red-500 transition-colors"
+              className={`
+                p-2 rounded-lg transition-all
+                
+                ${Theme === "Light"
+                  ? "bg-[#e0e5ec] shadow-[4px_4px_8px_#a3b1c6,_-4px_-4px_8px_#ffffff] active:shadow-[inset_3px_3px_6px_#a3b1c6,_inset_-3px_-3px_6px_#ffffff] hover:bg-red-500"
+                  : "bg-[#1f2937] shadow-[4px_4px_8px_#0b1120,_-4px_-4px_8px_#374151] active:shadow-[inset_3px_3px_6px_#0b1120,_inset_-3px_-3px_6px_#374151] text-white hover:bg-red-500"
+                }
+              `}
             >
-              <RiDeleteBin2Fill size={26} />
+              <RiDeleteBin2Fill size={20} />
             </button>
+
           </div>
         ))}
 
