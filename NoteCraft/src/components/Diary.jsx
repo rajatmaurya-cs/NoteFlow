@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { LuMoveUpRight } from "react-icons/lu";
 import Radio from './Animation/Radio';
 import { ToggleTheme } from './AuthProvider';
+import toast from 'react-hot-toast';
 
 const Diary = () => {
 
@@ -30,7 +31,9 @@ const Diary = () => {
   };
 
   const handleSubmit = () => {
-    if (!work.trim()) return;
+    if (!work.trim()){ 
+      toast.error("Please Enter a Task");
+       return;}
 
     const newTask = {
       id: uuidv4(),

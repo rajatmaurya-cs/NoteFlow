@@ -69,7 +69,6 @@ const Navbar = () => {
         </nav>
 
         <Switch
-          // checked={Theme === 'Dark'}
           onChange={toggle}
         />
 

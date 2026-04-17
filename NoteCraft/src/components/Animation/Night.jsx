@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const twinkle1 = keyframes`
@@ -89,8 +89,8 @@ const Aurora2 = styled(Aurora)`
 const Nebula = styled.div`
   position: absolute;
   border-radius: 50%;
-  animation: ${nebulaPulse} ${({ dur }) => dur || '11s'} ease-in-out infinite
-    ${({ delay }) => delay || '0s'};
+  animation: ${nebulaPulse} ${({ $dur }) => $dur || '11s'} ease-in-out infinite
+    ${({ $delay }) => $delay || '0s'};
 `;
 
 const MoonWrap = styled.div`
@@ -122,12 +122,12 @@ const StarLayer = styled.div`
   inset: 0;
 `;
 
-/* individual star uses CSS variables injected via style prop */
+
 const Star = styled.div`
   position: absolute;
   border-radius: 50%;
-  animation-name: ${({ anim }) =>
-    anim === 1 ? twinkle1 : anim === 2 ? twinkle2 : twinkle3};
+  animation-name: ${({ $anim }) =>
+    $anim === 1 ? twinkle1 : $anim === 2 ? twinkle2 : twinkle3};
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-duration: var(--dur);
@@ -216,32 +216,32 @@ const Night = () => {
           top: '8%', left: '5%', width: '240px', height: '90px',
           background: 'radial-gradient(ellipse, rgba(80,40,160,0.18), transparent 70%)',
         }}
-        dur="11s"
-        delay="0s"
+        $dur="11s"
+        $delay="0s"
       />
       <Nebula
         style={{
           top: '22%', right: '18%', width: '190px', height: '65px',
           background: 'radial-gradient(ellipse, rgba(20,80,130,0.14), transparent 70%)',
         }}
-        dur="8s"
-        delay="3s"
+        $dur="8s"
+        $delay="3s"
       />
       <Nebula
         style={{
           top: '57%', left: '38%', width: '270px', height: '75px',
           background: 'radial-gradient(ellipse, rgba(60,20,100,0.10), transparent 70%)',
         }}
-        dur="15s"
-        delay="1s"
+        $dur="15s"
+        $delay="1s"
       />
       <Nebula
         style={{
           top: '70%', left: '10%', width: '200px', height: '60px',
           background: 'radial-gradient(ellipse, rgba(30,60,120,0.10), transparent 70%)',
         }}
-        dur="12s"
-        delay="5s"
+        $dur="12s"
+        $delay="5s"
       />
 
       {/* Moon */}
@@ -255,7 +255,7 @@ const Night = () => {
         {starsRef.current.map(star => (
           <Star
             key={star.id}
-            anim={star.anim}
+            $anim={star.anim}
             style={{
               left: `${star.x}%`,
               top: `${star.y}%`,

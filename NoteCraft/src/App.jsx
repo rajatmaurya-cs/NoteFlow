@@ -11,6 +11,7 @@ import Actions from './components/Actions';
 import LogIn from './components/LogIn';
 import Practice from './components/Practice';
 import Night from './components/Animation/Night'
+import Aimode from './components/Aimode';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
      
       {Theme === "Dark" && (
-        <div className="fixed inset-0 -z-100">
+        <div className="fixed inset-0 -z-100 ">
           < Night/>
         </div>
       )}
@@ -44,6 +45,8 @@ function App() {
           <Route path='/actions' element={<Actions />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/y' element={<Practice />} />
+          <Route path='/ai' element={<Aimode />} />
+
 
         </Routes>
       </div>

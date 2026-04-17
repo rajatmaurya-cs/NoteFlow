@@ -93,7 +93,7 @@ const Home = () => {
                 }
               >
 
-                {/* SUBJECT + DATE */}
+            
                 <div className="flex justify-between items-center mb-4">
                   <span
                     className={
@@ -110,12 +110,12 @@ const Home = () => {
                   </span>
                 </div>
 
-                {/* TITLE */}
+         
                 <h3 className="text-xl font-bold mb-3">
                   {item.title}
                 </h3>
 
-                {/* BUTTON */}
+            
                 <div
                   className={
                     isLight
