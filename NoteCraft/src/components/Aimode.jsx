@@ -52,7 +52,7 @@ const Aimode = () => {
 
 
     try {
-      const response = await axios.post("http://localhost:3000/api/ai", {
+      const response = await axios.post("http://localhost:3000/api/a", {
         question: question,
         model: model,
       });
@@ -77,8 +77,13 @@ const Aimode = () => {
 
       setQuestion("");
     } catch (error) {
+
       console.log(error);
+
       setRes("Error occurred");
+
+      setLoading(false);
+
     } finally {
       setTimeout(() => {
         setLoading(false);
