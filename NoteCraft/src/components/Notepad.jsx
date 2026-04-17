@@ -14,7 +14,8 @@ import { subjects } from "./Home";
 import { marked } from "marked";
 
 import { Sparkles, Bot } from "lucide-react";
-import Loading from "./Animation/Loading";
+
+import Second from './Animation/Second'
 
 
 const Notepad = () => {
@@ -156,8 +157,9 @@ const Notepad = () => {
   if (loading) return (
     <div className="flex flex-col">
 
-
-      <Loading />
+     <Second/>
+     
+     
 
     </div>
 

@@ -4,7 +4,9 @@ import { Search, SendHorizonal, Download } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "./Animation/Loader";
+
 import Gemini from "./Animation/Gemini";
+
 import { ToggleTheme } from "./AuthProvider";
 
 
