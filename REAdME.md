@@ -100,7 +100,7 @@
 
 <br/>
 
-<img src="./NoteCraft/src/assets/Rajat.png" alt="NoteCraft Development Team" width="560" style="border-radius: 16px;"/>
+<img src="./NoteCraft/src/assets//README.png" alt="NoteCraft Development Team" width="560" style="border-radius: 16px;"/>
 
 </div>
 
