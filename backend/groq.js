@@ -18,6 +18,10 @@ IMPORTANT OUTPUT RULES:
   2. second step
   3. third step
 
+  IMPORTANT RULES:
+  - Always use subheading for Points  and explanation should be in paragraph style.
+  - Always leave upto 3 new Line character Space between each paragraph
+
 Style:
 - Natural, human tutor-like explanation
 - Simple and readable
@@ -61,6 +65,10 @@ async function askGroq(studentQuestion, model) {
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error("Error:", error.response?.data || error.message);
+    res.statuse(500).json({
+      success:false,
+      message:"Errro Occured"
+    })
   }
 }
 

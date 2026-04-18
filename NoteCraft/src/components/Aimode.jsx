@@ -11,7 +11,9 @@ import { ToggleTheme } from "./AuthProvider";
 
 
 const Aimode = () => {
+
   const Navigate = useNavigate();
+
   const { Theme } = useContext(ToggleTheme)
 
   const [question, setQuestion] = useState("");
@@ -31,6 +33,8 @@ const Aimode = () => {
 
   const askGroq = async () => {
 
+    setQuestion('')
+
     console.log("SENDING MODEL:", model);
 
     if (question === '') {
@@ -41,18 +45,14 @@ const Aimode = () => {
 
     }
 
-    setAskedQuestion('');
-
-    setRes('');
-
     setLoading(true);
-
+    setQuestion("");
     setAskedQuestion(question);
 
 
 
     try {
-      const response = await axios.post("http://localhost:3000/api/a", {
+      const response = await axios.post("http://localhost:3000/api/ai", {
         question: question,
         model: model,
       });
@@ -65,7 +65,7 @@ const Aimode = () => {
 
       }, 3000)
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "aiNote",
         JSON.stringify({
           question: question,
@@ -73,9 +73,8 @@ const Aimode = () => {
         })
       );
 
+      
 
-
-      setQuestion("");
     } catch (error) {
 
       console.log(error);
@@ -109,7 +108,7 @@ const Aimode = () => {
       <div className="w-full max-w-4xl flex-1 overflow-y-auto pt-10 pb-40 space-y-6 mt-15">
 
         {askedQuestion && (
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-5">
             <div className="bg-[#303030] px-5 py-4 rounded-2xl max-w-2xl text-white shadow-md">
               {askedQuestion}
             </div>

@@ -61,141 +61,122 @@ const Diary = () => {
   }
 
   return (
-    <div
-      className={`min-h-screen w-full flex justify-center items-start pt-20
-      ${Theme === "Light" ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200" : "bg-transparent"}`}
-    >
+  <div
+    className={`min-h-screen w-full flex justify-center items-start pt-24 px-4 transition-all duration-500
+    ${
+      Theme === "Light"
+        ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200"
+        : ""
+    }`}
+  >
+    <div className="w-full max-w-3xl flex flex-col items-center">
 
-      <div className="w-full max-w-3xl flex flex-col items-center mt-20">
+      
+      <h1
+        className={`text-4xl md:text-5xl font-bold mb-10 text-center ${
+          Theme === "Light" ? "text-slate-800" : "text-white"
+        }`}
+      >
+        Manage Your Tasks
+      </h1>
 
-        {/* Heading */}
-        <h1 className={Theme === 'Light' ? "text-4xl font-semibold mb-8 text-center text-black" : "text-4xl font-semibold mb-8 text-center text-white"}>
-          Manage Your Task
-        </h1>
+   
+      <div
+        className={`w-full flex items-center gap-4 p-4 rounded-3xl border backdrop-blur-xl mb-8 transition-all
+        ${
+          Theme === "Light"
+            ? "bg-white/70 border-white/40 shadow-2xl"
+            : "bg-white/10 border-white/10 shadow-2xl"
+        }`}
+      >
+        <input
+          type="text"
+          placeholder="Enter your task..."
+          value={work}
+          onChange={(e) => setWork(e.target.value)}
+          className={`flex-1 px-5 py-4 rounded-2xl outline-none text-lg transition-all
+          ${
+            Theme === "Light"
+              ? "bg-white/80 text-slate-700 placeholder:text-slate-400 border border-white shadow-md focus:ring-2 focus:ring-indigo-400"
+              : "bg-white/10 text-white placeholder:text-gray-300 border border-white/10 focus:ring-2 focus:ring-indigo-400"
+          }`}
+        />
 
-        {/* Input Section */}
-        <div
-          className={`flex items-center gap-4 p-4 rounded-2xl w-full mb-8
-          ${Theme === "Light"
-              ? "bg-[#e0e5ec] shadow-[8px_8px_15px_#a3b1c6,_-8px_-8px_15px_#ffffff]"
-              : "bg-[#1f2937] shadow-[6px_6px_12px_#0b1120,_-6px_-6px_12px_#374151]"
-            }`}
-        >
-
-          <input
-            type="text"
-            placeholder="Enter Task"
-            value={work}
-            onChange={(e) => setWork(e.target.value)}
-            className={`
-              flex-1 px-4 py-2 rounded-xl focus:outline-none transition-all
-              
-              ${Theme === "Light"
-                ? `
-                  bg-[#e0e5ec]
-                  shadow-[inset_4px_4px_8px_#a3b1c6,_inset_-4px_-4px_8px_#ffffff]
-                `
-                : `
-                  bg-[#1f2937]
-                  shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151] text-white
-                `}
-            `}
-          />
-
-          <button
-            onClick={handleSubmit}
-            className={`
-              p-3 rounded-xl transition-all
-              
-              ${Theme === "Light"
-                ? `
-                  bg-[#e0e5ec]
-                  shadow-[5px_5px_10px_#a3b1c6,_-5px_-5px_10px_#ffffff]
-                  active:shadow-[inset_4px_4px_8px_#a3b1c6,_inset_-4px_-4px_8px_#ffffff]
-                `
-                : `
-                  bg-[#1f2937]
-                  shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]
-                  active:shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151] text-white
-                `}
-            `}
-          >
-            <IoIosSave size={26} />
-          </button>
-
-        </div>
-
-        {/* Task List Container */}
-        <div
-          className={`
-            w-full p-6 rounded-2xl flex flex-col gap-4
-            
-            ${Theme === "Light"
-              ? "bg-[#e0e5ec] shadow-[10px_10px_20px_#a3b1c6,_-10px_-10px_20px_#ffffff]"
-              : "bg-[#1f2937] shadow-[8px_8px_15px_#0b1120,_-8px_-8px_15px_#374151]"
-            }
-          `}
-        >
-
-          {container.map((item) => (
-            <div
-              key={item.id}
-              className={`
-                flex justify-between items-center px-4 py-3 rounded-xl transition-all
-                
-                ${Theme === "Light"
-                  ? "bg-[#e0e5ec] shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]"
-                  : "bg-[#1f2937] shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]"
-                }
-              `}
-            >
-
-              <h2 className={Theme === 'Light' ? "text-black" : "text-white"}>{item.task}</h2>
-
-              <div className="flex gap-3">
-
-                <button
-                  onClick={() => handleEdit(item.id)}
-                  className={
-                    Theme === "Light"
-                      ? "p-2 rounded-lg transition-all active:scale-90 text-black hover:bg-green-500"
-                      : "p-2 rounded-lg transition-all active:scale-90 text-white hover:bg-green-500"
-                  }
-                >
-                  <MdEditSquare size={22} />
-                </button>
-
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className={Theme === 'Light' ? "p-2 rounded-lg transition-all active:scale-90 hover:bg-red-500" : "p-2 rounded-lg transition-all active:scale-90 text-white hover:bg-red-500"}
-                >
-                  <RiDeleteBin2Fill size={22} />
-                </button>
-
-              </div>
-            </div>
-          ))}
-
-        </div>
-
-        {/* Navigation Button */}
         <button
-          onClick={() => navigate('/notepad')}
-          className={`
-            mt-6 px-6 py-3 rounded-xl flex items-center gap-2 transition-all
-            
-            ${Theme === "Light"
-              ? "bg-[#e0e5ec] shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]"
-              : "bg-[#1f2937] shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151] text-white"
-            }
-          `}
+          onClick={handleSubmit}
+          className={`p-4 rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95
+          ${
+            Theme === "Light"
+              ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl"
+              : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-xl"
+          }`}
         >
-          Go to Editor <LuMoveUpRight size={20} />
+          <IoIosSave size={24} />
         </button>
-
       </div>
+
+   
+      <div
+        className={`w-full p-5 rounded-3xl border backdrop-blur-xl flex flex-col gap-4 transition-all
+        ${
+          Theme === "Light"
+            ? "bg-white/70 border-white/40 shadow-2xl"
+            : "bg-white/10 border-white/10 shadow-2xl"
+        }`}
+      >
+        {container.map((item) => (
+          <div
+            key={item.id}
+            className={`flex justify-between items-center px-5 py-4 rounded-2xl transition-all hover:scale-[1.01]
+            ${
+              Theme === "Light"
+                ? "bg-white/80 shadow-md"
+                : "bg-white/10 border border-white/10"
+            }`}
+          >
+            <h2
+              className={`text-lg font-medium ${
+                Theme === "Light" ? "text-slate-800" : "text-white"
+              }`}
+            >
+              {item.task}
+            </h2>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => handleEdit(item.id)}
+                className="p-3 rounded-xl bg-green-500 text-white hover:scale-105 active:scale-95 transition-all"
+              >
+                <MdEditSquare size={20} />
+              </button>
+
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="p-3 rounded-xl bg-red-500 text-white hover:scale-105 active:scale-95 transition-all"
+              >
+                <RiDeleteBin2Fill size={20} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      
+      <button
+        onClick={() => navigate("/notepad")}
+        className={`mt-8 px-6 py-4 rounded-2xl flex items-center gap-2 font-semibold transition-all duration-300 hover:scale-105 active:scale-95
+        ${
+          Theme === "Light"
+            ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl"
+            : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-xl"
+        }`}
+      >
+        Go to Editor <LuMoveUpRight size={20} />
+      </button>
+
     </div>
-  );
+  </div>
+);
 };
 
 export default Diary;

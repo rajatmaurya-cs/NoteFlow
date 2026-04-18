@@ -19,33 +19,36 @@ const LogIn = () => {
   const [done, setdone] = useState(false);
 
 
-  const handlesubmit = () => {
+ const handlesubmit = () => {
+  console.log("Entered in handlesubmit");
 
-    console.log("Entered in handlesubmit")
-
-    if (email == '' || password == '') {
-      toast.error("All Fields are required")
-      return;
-    }
-
-  
-
-    sessionStorage.setItem('user', JSON.stringify(""))
-
-    setdone(true);
-
-    setTimeout(() => {
-
-
-      navigate('/')
-
-    }, 3000)
-
-
-
-
-
+  if (email === "" || password === "") {
+    toast.error("All Fields are required");
+    return;
   }
+
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+  if (!emailRegex.test(email)) {
+    toast.error("Enter a valid email");
+    return;
+  }
+
+
+  if (password.length <= 6) {
+    toast.error("Password must be greater than 6 characters");
+    return;
+  }
+
+  sessionStorage.setItem("user", JSON.stringify(email));
+
+  setdone(true);
+
+  setTimeout(() => {
+    navigate("/");
+  }, 3000);
+};
 
   if (done) return (
 
@@ -59,110 +62,102 @@ const LogIn = () => {
 
 
   )
-  return (
-
-   <div
-  className={`min-h-screen w-full flex justify-center items-center px-4
-  ${Theme === "Light" ? "bg-[#e0e5ec]" : "bg-transparent"}`}
->
+ return (
   <div
-    className={`
-    w-full max-w-md rounded-2xl p-8 flex flex-col justify-center transition-all duration-300
-    
-    ${Theme === "Light"
-        ? `
-      bg-[#e0e5ec]
-      shadow-[10px_10px_20px_#a3b1c6,_-10px_-10px_20px_#ffffff]
-    `
-        : `
-      bg-[#1f2937]
-      shadow-[8px_8px_15px_#0b1120,_-8px_-8px_15px_#374151]
-    `}
-  `}
+    className={`min-h-screen w-full flex justify-center items-center px-4 transition-all duration-500
+    ${
+      Theme === "Light"
+        ? "bg-gradient-to-br from-slate-100 via-white to-sky-100"
+        : "bg-gradient-to-br from-[#0f172a] via-[#111827] to-[#1e293b]"
+    }`}
   >
-
- 
-    <div className="flex justify-center">
-      <Egg />
-    </div>
+    <div
+      className={`w-full max-w-md rounded-3xl p-8 border backdrop-blur-2xl transition-all duration-500 mt-15
+      ${
+        Theme === "Light"
+          ? "bg-white/70 border-white/50 shadow-2xl"
+          : "bg-white/10 border-white/10 shadow-2xl"
+      }`}
+    >
+   
+      <div className="flex justify-center mb-4">
+        <Egg />
+      </div>
 
     
-    <div className="flex flex-col gap-6 mt-10">
+      <div className="text-center mb-8">
+        <h1
+          className={`text-3xl font-bold ${
+            Theme === "Light" ? "text-slate-800" : "text-white"
+          }`}
+        >
+          Welcome Back
+        </h1>
 
-     
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        className={`
-          w-full px-4 py-3 rounded-xl focus:outline-none transition-all duration-300
-          
-          ${Theme === "Light"
-            ? `
-              bg-[#e0e5ec] text-gray-700
-              shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
-              focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
-            `
-            : `
-              bg-[#1f2937] text-white
-              shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
-              focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
-            `}
-        `}
-      />
+        <p
+          className={`mt-2 text-sm ${
+            Theme === "Light" ? "text-slate-500" : "text-gray-300"
+          }`}
+        >
+          Sign in to continue to Notecraft
+        </p>
+      </div>
 
    
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        className={`
-          w-full px-4 py-3 rounded-xl focus:outline-none transition-all duration-300
-          
-          ${Theme === "Light"
-            ? `
-              bg-[#e0e5ec] text-gray-700
-              shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
-              focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
-            `
-            : `
-              bg-[#1f2937] text-white
-              shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
-              focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
-            `}
-        `}
-      />
+      <div className="flex flex-col gap-5">
+        {/* Email */}
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter Email"
+          className={`w-full px-5 py-4 rounded-2xl outline-none text-lg transition-all duration-300
+          ${
+            Theme === "Light"
+              ? "bg-white/80 text-slate-700 placeholder:text-slate-400 border border-white shadow-lg focus:ring-2 focus:ring-indigo-400"
+              : "bg-white/10 text-white placeholder:text-gray-300 border border-white/10 focus:ring-2 focus:ring-indigo-400"
+          }`}
+        />
 
-  
-      <button
-        onClick={handlesubmit}
-        className={`
-          w-full py-3 rounded-xl transition-all duration-200 font-medium
-          
-          ${Theme === "Light"
-            ? `
-              bg-[#e0e5ec] text-gray-700
-              shadow-[6px_6px_12px_#a3b1c6,_-6px_-6px_12px_#ffffff]
-              active:shadow-[inset_4px_4px_8px_#a3b1c6,_inset_-4px_-4px_8px_#ffffff]
-              hover:bg-blue-500
-            `
-            : `
-              bg-[#1f2937] text-white
-              shadow-[5px_5px_10px_#0b1120,_-5px_-5px_10px_#374151]
-              active:shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
-              hover:bg-indigo-900
-            `}
-        `}
+   
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter Password"
+          className={`w-full px-5 py-4 rounded-2xl outline-none text-lg transition-all duration-300
+          ${
+            Theme === "Light"
+              ? "bg-white/80 text-slate-700 placeholder:text-slate-400 border border-white shadow-lg focus:ring-2 focus:ring-indigo-400"
+              : "bg-white/10 text-white placeholder:text-gray-300 border border-white/10 focus:ring-2 focus:ring-indigo-400"
+          }`}
+        />
+
+      
+        <button
+          onClick={handlesubmit}
+          className={`w-full py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-[1.02] active:scale-95
+          ${
+            Theme === "Light"
+              ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl"
+              : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-xl"
+          }`}
+        >
+          Sign In
+        </button>
+      </div>
+
+     
+      <p
+        className={`text-center text-sm mt-6 ${
+          Theme === "Light" ? "text-slate-500" : "text-gray-300"
+        }`}
       >
-        Sign In
-      </button>
-
+        Secure login for your personal notes
+      </p>
     </div>
   </div>
-</div>
-  )
+);
 }
 
 export default LogIn

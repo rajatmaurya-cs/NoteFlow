@@ -9,6 +9,8 @@ const Card = () => {
 
   const res = data.filter((item) => item.id == Id);
 
+  console.log(res);
+
   const { Theme } = useContext(ToggleTheme)
 
   return (

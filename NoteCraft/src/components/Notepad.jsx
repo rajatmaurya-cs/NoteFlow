@@ -2,7 +2,7 @@ import { useState, useMemo, useRef, useContext, useEffect } from "react";
 import JoditEditor from "jodit-react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import Robot from "./Animation/Robot";
+
 import toast from "react-hot-toast";
 import { Report } from 'notiflix';
 import Trash from '../assets/Trash2.png';
@@ -49,7 +49,7 @@ const Notepad = () => {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("aiNote");
+      const stored = sessionStorage.getItem("aiNote");
 
       if (!stored) return;
 
@@ -157,152 +157,153 @@ const Notepad = () => {
   if (loading) return (
     <div className="flex flex-col">
 
-     <Second/>
-     
-     
+      <Second />
+
+
 
     </div>
 
   )
 
-  return (
-    <div className={Theme === 'Light' ? "min-h-screen flex flex-col items-center space-y-8 p-6 bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200" : "min-h-screen flex flex-col items-center space-y-8 p-6 bg-gray-500 dark:bg-transparent border-4"}>
+ return (
+  <div
+    className={`min-h-screen flex flex-col items-center p-6 transition-all duration-500
+    ${
+      Theme === "Light"
+        ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200"
+        : ""
+    }`}
+  >
+    <div className="w-full max-w-5xl mt-24">
 
-      <div className="w-full max-w-5xl mt-20 ">
-
-        <div className={`flex ${error ? "justify-between" : "justify-center gap-6"} items-center flex-wrap`}>
-          {error && <Robot />}
-
-          <form className="flex flex-col space-y-3 items-center">
-            <select
-              className={`
-                w- px-4 py-2 rounded-xl focus:outline-none transition-all duration-300
-                ${Theme === "Light"
-                  ? `
-                    bg-[#e0e5ec] text-gray-700
-                    shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
-                    focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
-                  `
-                  : `
-                    bg-[#1f2937] text-white
-                    shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
-                    focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
-                  `}
-              `}
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-            >
-              <option value="" disabled>Select Subject</option>
-              {subjects.map((item, index) => (
-                <option key={index} value={item}>{item}</option>
-              ))}
-            </select>
-
-            <input
-              className={`
-                w- px-4 py-2 rounded-xl focus:outline-none transition-all duration-300
-                ${Theme === "Light"
-                  ? `
-                    bg-[#e0e5ec] text-gray-700
-                    shadow-[inset_5px_5px_10px_#a3b1c6,_inset_-5px_-5px_10px_#ffffff]
-                    focus:shadow-[inset_8px_8px_15px_#a3b1c6,_inset_-8px_-8px_15px_#ffffff]
-                  `
-                  : `
-                    bg-[#1f2937] text-white
-                    shadow-[inset_4px_4px_8px_#0b1120,_inset_-4px_-4px_8px_#374151]
-                    focus:shadow-[inset_6px_6px_12px_#0b1120,_inset_-6px_-6px_12px_#374151]
-                  `}
-                ${error === 'title' || error === 'Both'
-                  ? "ring-2 ring-red-400 animate-pulse"
-                  : ""}
-              `}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter Title"
-              type="text"
-            />
-          </form>
-
-          <div
-            className={`
-              p-4 rounded-2xl transition-all duration-300
-              ${Theme === "Light"
-                ? `
-                  bg-[#e0e5ec]
-                  shadow-[inset_6px_6px_12px_#a3b1c6,_inset_-6px_-6px_12px_#ffffff]
-                `
-                : `
-                  bg-[#1f2937]
-                  shadow-[inset_5px_5px_10px_#0b1120,_inset_-5px_-5px_10px_#374151]
-                `}
-            `}
-          >
-            <Calendar
-              onChange={setDate}
-              value={date}
-              className="bg-transparent border-none w-full"
-            />
-          </div>
-        </div>
-
-        <div className="mt-6 rounded-xl overflow-hidden">
-
-          <JoditEditor
-            ref={editor}
-            value={content}
-            config={config}
-            onBlur={newContent => setContent(newContent)} 
-            onChange={() => { }} 
-          />
-
-        </div>
-
+     
+      <div
+        className={`flex flex-wrap items-start justify-between gap-6 mb-8`}
+      >
        
+   
 
-        <div className="flex justify-between items-center mt-6 flex-wrap gap-4">
-
-         
-          <button
-            onClick={handleSubmit}
-            className={`
-      px-6 py-2.5 rounded-xl font-medium transition-all duration-300
-      ${Theme === "Light"
-                ? "bg-white text-gray-800 border border-gray-200 hover:bg-gray-100 shadow-sm"
-                : "bg-gray-900 text-white border border-gray-700 hover:bg-gray-800"
-              }
-    `}
+        
+        <form className="flex flex-col gap-4 flex-1 min-w-[280px]">
+     
+          <select
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            className={`w-full px-6 py-4 rounded-2xl outline-none text-lg transition-all duration-300 border backdrop-blur-xl
+            ${
+              Theme === "Light"
+                ? "bg-white/80 text-slate-700 border-white shadow-xl focus:ring-2 focus:ring-indigo-400"
+                : "bg-white/10 text-white border-white/10 focus:ring-2 focus:ring-indigo-400"
+            }`}
           >
-            Submit
-          </button>
+            <option value="" disabled>
+              Select Subject
+            </option>
+
+            {subjects.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
 
       
-          <button
-            onClick={handelAi}
-            className={`
-      flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium transition-all duration-300
-      ${Theme === "Light"
-                ? "bg-black text-white hover:bg-gray-800"
-                : "bg-white text-black hover:bg-gray-200"
-              }
-    `}
-          >
-            <Bot size={16} />
-            AI Mode
-            <Sparkles size={14} />
-          </button>
-
-
-          <img
-            onClick={handleClear}
-            className="h-16 w-16 cursor-pointer hover:scale-105 transition"
-            src={Trash}
-            alt="clear"
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter Title"
+            className={`w-full px-6 py-4 rounded-2xl outline-none text-lg transition-all duration-300 border backdrop-blur-xl
+            ${
+              Theme === "Light"
+                ? "bg-white/80 text-slate-700 placeholder:text-slate-400 border-white shadow-xl focus:ring-2 focus:ring-indigo-400"
+                : "bg-white/10 text-white placeholder:text-gray-300 border-white/10 focus:ring-2 focus:ring-indigo-400"
+            }
+            ${
+              error === "title" || error === "Both"
+                ? "ring-2 ring-red-400 animate-pulse"
+                : ""
+            }`}
           />
+        </form>
 
+       
+        <div
+          className={`p-4 rounded-3xl border backdrop-blur-xl transition-all duration-300
+          ${
+            Theme === "Light"
+              ? "bg-white/70 border-white/40 shadow-2xl"
+              : "bg-white/10 border-white/10 shadow-2xl"
+          }`}
+        >
+          <Calendar
+            onChange={setDate}
+            value={date}
+            className="bg-transparent border-none"
+          />
         </div>
       </div>
+
+      
+      <div
+        className={`rounded-3xl overflow-hidden border backdrop-blur-xl transition-all duration-300
+        ${
+          Theme === "Light"
+            ? "bg-white/70 border-white/40 shadow-2xl"
+            : "bg-white/10 border-white/10 shadow-2xl"
+        }`}
+      >
+        <JoditEditor
+          ref={editor}
+          value={content}
+          config={config}
+          onBlur={(newContent) => setContent(newContent)}
+          onChange={() => {}}
+        />
+      </div>
+
+ 
+      <div className="flex flex-wrap justify-between items-center gap-4 mt-8">
+
+        
+        <button
+          onClick={handleSubmit}
+          className={`px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 active:scale-95
+          ${
+            Theme === "Light"
+              ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl"
+              : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-xl"
+          }`}
+        >
+          Submit
+        </button>
+
+    
+        <button
+          onClick={handelAi}
+          className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 active:scale-95
+          ${
+            Theme === "Light"
+              ? "bg-slate-900 text-white hover:bg-black shadow-xl"
+              : "bg-white text-slate-900 hover:bg-gray-200 shadow-xl"
+          }`}
+        >
+          <Bot size={18} />
+          ENTER AI MODE
+        </button>
+
+       
+        <button
+          onClick={handleClear}
+          className="p-3 rounded-2xl  text-white  hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl"
+        >
+          <img src={Trash} alt="clear" className="h-20 w-20" />
+        </button>
+
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Notepad;

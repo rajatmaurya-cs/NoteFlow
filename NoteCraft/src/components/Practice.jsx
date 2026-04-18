@@ -1,43 +1,78 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Practice= () => {
+const Practice = () => {
   return (
     <StyledWrapper>
-      <div className="container" />
+      <div className="loader" />
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  position: absolute;
-  inset: 0;   /* full screen */
-  z-index: -10;
-
-  .container {
-    width: 100%;
-    height: 100%;
-
-    --s: 200px;
-    --c1: #1d1d1d;
-    --c2: #4e4f51;
-    --c3: #3c3c3c;
-
-    background: repeating-conic-gradient(
-          from 30deg,
-          #0000 0 120deg,
-          var(--c3) 0 180deg
-        )
-        calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
-      repeating-conic-gradient(
-        from 30deg,
-        var(--c1) 0 60deg,
-        var(--c2) 0 120deg,
-        var(--c3) 0 180deg
-      );
-
-    background-size: var(--s) calc(var(--s) * 0.577);
+  .loader {
+    position: relative;
+    width: 120px;
+    height: 90px;
+    margin: 0 auto;
   }
-`;
+
+  .loader:before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #2a9d8f;
+    animation: loading-bounce 0.5s ease-in-out infinite alternate;
+  }
+
+  .loader:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 7px;
+    width: 45px;
+    border-radius: 4px;
+    box-shadow: 0 5px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 95px 0 #f2f2f2;
+    animation: loading-step 1s ease-in-out infinite;
+  }
+
+  @keyframes loading-bounce {
+    0% {
+      transform: scale(1, 0.7);
+    }
+
+    40% {
+      transform: scale(0.8, 1.2);
+    }
+
+    60% {
+      transform: scale(1, 1);
+    }
+
+    100% {
+      bottom: 140px;
+    }
+  }
+
+  @keyframes loading-step {
+    0% {
+      box-shadow: 0 10px 0 rgba(0, 0, 0, 0),
+              0 10px 0 #f2f2f2,
+              -35px 50px 0 #f2f2f2,
+              -70px 90px 0 #f2f2f2;
+    }
+
+    100% {
+      box-shadow: 0 10px 0 #f2f2f2,
+              -35px 50px 0 #f2f2f2,
+              -70px 90px 0 #f2f2f2,
+              -70px 90px 0 rgba(0, 0, 0, 0);
+    }
+  }`;
 
 export default Practice;
