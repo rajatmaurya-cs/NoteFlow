@@ -30,6 +30,14 @@ const navItems = [
     path: "/actions",
     icon: "https://img.icons8.com/color/48/filled-trash.png",
   },
+
+  {
+    name: "AboutUs",
+    path: "/AboutUs",
+    icon: "https://img.icons8.com/3d-fluency/94/conference-call--v1.png",
+  },
+
+
 ];
 
 const Navbar = () => {

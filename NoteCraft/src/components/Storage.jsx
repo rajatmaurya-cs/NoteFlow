@@ -1,31 +1,31 @@
-import React, { useEffect , useState} from 'react'
-import { Notes } from './mockData';
-import Home from './Home';
-const Storage = () => {
+// import React, { useEffect , useState} from 'react'
+// import { Notes } from './mockData';
+// import Home from './Home';
+// const Storage = () => {
 
-    const [data, setData] = useState([]);
+//     const [data, setData] = useState([]);
     
-    useEffect(() => {
+//     useEffect(() => {
     
-    const savedData = JSON.parse(localStorage.getItem("myData"));
-    if (savedData) {
-      setData(savedData);
-    } else {
-      const initialMockData = Notes
-      setData(initialMockData);
-      localStorage.setItem("myData", JSON.stringify(initialMockData));
-    }
-  }, []);
+//     const savedData = JSON.parse(localStorage.getItem("myData"));
+//     if (savedData) {
+//       setData(savedData);
+//     } else {
+//       const initialMockData = Notes
+//       setData(initialMockData);
+//       localStorage.setItem("myData", JSON.stringify(initialMockData));
+//     }
+//   }, []);
 
 
-  return (
-    <div>
+//   return (
+//     <div>
 
-        <Home data = {data}/>
+//         <Home data = {data}/>
 
 
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Storage
+// export default Storage

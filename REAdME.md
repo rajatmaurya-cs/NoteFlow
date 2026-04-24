@@ -23,6 +23,19 @@
 
 </div>
 
+
+
+## Specialized AI Models for Every Learning Style
+
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 600px; margin: 20px auto;">
+  <img src="./NoteCraft/src/assets/copilot.png" alt="Microsoft Copilot" width="60" style="border-radius: 16px;"/>
+  <img src="./NoteCraft/src/assets/chatgpt2.png" alt="ChatGPT" width="60" style="border-radius: 16px;"/>
+  <img src="./NoteCraft/src/assets/meta.png" alt="Meta AI" width="60" style="border-radius: 16px;"/>
+  <img src="./NoteCraft/src/assets/claude.png" alt="Claude AI" width="60" style="border-radius: 16px;"/>
+</div>
+
+
+
 ---
 
 ## 🌟 What is NoteCraft?

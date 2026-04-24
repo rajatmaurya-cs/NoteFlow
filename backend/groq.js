@@ -32,6 +32,8 @@ Make responses look clean inside a chat application UI without any markdown rend
 `;
 
 async function askGroq(studentQuestion, model) {
+
+  console.log("The Api key is: ", GROQ_API_KEY )
   try {
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",

@@ -5,12 +5,25 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Loader from "./Animation/Loader";
 
+import copilot from '../assets/copilot.png'
+import Meta from '../assets/meta.png'
+import claude from '../assets/claude.png'
+import chatgpt from '../assets/chatgpt2.png'
+
 import Gemini from "./Animation/Gemini";
 
 import { ToggleTheme } from "./AuthProvider";
+import { Listbox } from '@headlessui/react'
 
 
 const Aimode = () => {
+
+  const models = [
+    { id: 'llama-3.1-8b-instant', name: 'Meta 3.2', desc: 'Fast' },
+    { id: 'groq/compound', name: 'Claude', desc: 'Advanced code & Debugging' },
+    { id: 'qwen/qwen3-32b', name: 'Copilot', desc: 'Advanced Math Problems' },
+    { id: 'openai/gpt-oss-120b', name: 'ChatGPT 5.1', desc: 'Tough Reasoning' },
+  ]
 
   const Navigate = useNavigate();
 
@@ -24,16 +37,25 @@ const Aimode = () => {
 
   const [loading, setLoading] = useState(false);
 
+  
 
 
 
-  const [model, setModel] = useState("llama-3.1-8b-instant");
+
+  const [model, setModel] = useState(models[0]);
 
 
 
   const askGroq = async () => {
 
+    console.log("The Model used: ",model.id);
+
+
+  
+
     setQuestion('')
+    setAskedQuestion('');
+    
 
     console.log("SENDING MODEL:", model);
 
@@ -46,7 +68,7 @@ const Aimode = () => {
     }
 
     setLoading(true);
-    setQuestion("");
+  
     setAskedQuestion(question);
 
 
@@ -54,7 +76,7 @@ const Aimode = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/ai", {
         question: question,
-        model: model,
+        model: model.id,
       });
 
 
@@ -73,7 +95,7 @@ const Aimode = () => {
         })
       );
 
-      
+
 
     } catch (error) {
 
@@ -134,37 +156,42 @@ const Aimode = () => {
 
 
       <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4">
+
         <div className="bg-[#2f2f2f] rounded-3xl px-5 py-4 flex items-center gap-4 border border-gray-700 shadow-xl">
 
-          <Search className="text-gray-400 w-5 h-5" />
 
 
-          <select
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-            className="bg-[#1f1f1f] text-white px-3 py-2 rounded-lg outline-none border border-gray-600"
-          >
+          {model.id === 'qwen/qwen3-32b' && <img src={copilot} className="w-20 h-20" alt="" />}
 
+          {model.id === 'llama-3.1-8b-instant' && <img src={Meta} className="w-20 h-20" alt="" />}
 
+          {model.id === 'groq/compound' && <img src={claude} className="w-20 h-20" alt="" />}
 
-            <option value={"llama-3.1-8b-instant"}>
-              llama 3.2
-            </option>
-            <option value={"groq/compound"}>
-              Groq 🚀
-            </option>
-            <option value={"qwen/qwen3-32b"}>
-              Qwen 3.5
-            </option>
-
-            <option value={"openai/gpt-oss-120b"}>
-             ChatGpt 5.1
-            </option>
+          {model.id === 'openai/gpt-oss-120b' && <img src={chatgpt} className="w-20 h-20" alt="" />}
 
 
 
 
-          </select>
+          <Listbox value={model} onChange={(value) => setModel(value)} >
+            <div className="relative w-fit">
+              <Listbox.Button className="relative w-full bg-[#1f1f1f] text-white px-5 py-2 rounded-lg border border-gray-600 text-left">
+                {model.name}
+              </Listbox.Button>
+
+              <Listbox.Options className="absolute bottom-full mb-1 w-65 bg-[#1f1f1f] rounded-lg border border-gray-600 z-50 max-h-60 overflow-y-auto">
+                {models.map((item) => (
+                  <Listbox.Option
+                    key={item.id}
+                    value={item}
+                    className="px-5 py-2 text-white hover:bg-[#2a2a2a] cursor-pointer"
+                  >
+                    <p className="font-medium">{item.name}</p>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </div>
+          </Listbox>
 
 
           <input
@@ -182,7 +209,7 @@ const Aimode = () => {
             className="bg-white text-black p-2 rounded-full hover:scale-105 duration-200"
             disabled={loading}
           >
-            <SendHorizonal size={18} />
+            <SendHorizonal size={30} />
           </button>}
 
 
@@ -190,7 +217,7 @@ const Aimode = () => {
             onClick={ImportNotePad}
             className="bg-white text-black p-2 rounded-full cursor-pointer hover:scale-105 duration-200"
           >
-            <Download size={18} />
+            <Download size={30} />
           </div>}
         </div>
       </div>

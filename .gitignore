@@ -35,3 +35,6 @@ Thumbs.db
 # Optional: lock files (only if you want)
 # package-lock.json
 # yarn.lock
+
+
+const notes = JSON.parse(localStorage.getItem('myData')) || [];

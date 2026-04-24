@@ -11,21 +11,49 @@ const Activity = () => {
   const [pie, setPie] = useState([]);
 
   function getLast7DaysNotes(notes) {
-    const today = new Date();
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(today.getDate() - 7);
 
-    return notes?.filter(note => {
-      const noteDate = new Date(note.date);
+    const today = new Date().getDate();
+
+    console.log("Today: ", today)
+
+
+
+    const sevenDaysAgo = today - 7
+
+
+
+    console.log("sevenDaysAgo: ", sevenDaysAgo)
+
+    const result = notes?.filter(note => {
+
+      const noteDate = new Date(note.date).getDate();
+
+      console.log("The noteDate", noteDate)
+
       return noteDate >= sevenDaysAgo && noteDate <= today;
+
     });
+
+    return result;
   }
 
   useEffect(() => {
-    const notes = JSON.parse(localStorage.getItem('myData')) || [];
-    const result = getLast7DaysNotes(notes);
 
-    setFilteredNotes(result?.map((item) => item.date) || []);
+    console.log("Before parsing:", localStorage.getItem('myData'));
+
+    const notes = JSON.parse(localStorage.getItem('myData')) || [];
+
+    console.log("After parsing:", notes);
+
+
+    const result = getLast7DaysNotes(notes); // Store dummy Data
+
+    console.log("result: ", result)
+
+    setFilteredNotes(result?.map((item) => item.date) || []); // Stores Date
+
+    console.log("The filteredNotes: ", filteredNotes);
+
     setWords(result?.map((item) => item.description.length) || []);
 
     const freqObj = {};
@@ -33,10 +61,14 @@ const Activity = () => {
       freqObj[item.subject] = (freqObj[item.subject] || 0) + 1;
     }
 
-    const arr = Object.entries(freqObj).map(([subject, count]) => ({
-      name: subject,
-      value: count
-    }));
+    const arr = [];
+
+    for (let subject in freqObj) {
+      arr.push({
+        name: subject,
+        value: freqObj[subject]
+      });
+    }
 
     setPie(arr);
 
@@ -44,23 +76,23 @@ const Activity = () => {
 
   const isLight = Theme === "Light";
 
-  // 🔥 GLASS CONTAINER (no solid bg)
-  const containerClass = Theme === 'Light'?"bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 flex flex-col gap-8 p-6 min-h-screen":"flex flex-col gap-8 p-6 min-h-screen transition-all duration-300"
 
-  // 🔥 GLASS CARD
+  const containerClass = Theme === 'Light' ? "bg-gradient-to-br from-sky-50 via-sky-100 to-sky-200 flex flex-col gap-8 p-6 min-h-screen" : "flex flex-col gap-8 p-6 min-h-screen transition-all duration-300"
+
+
   const cardClass = `w-full h-80 rounded-2xl p-4 transition-all duration-300
     ${isLight
       ? "bg-white/80 backdrop-blur-md border border-gray-200 shadow-md"
       : "bg-white/10 backdrop-blur-xl border border-white/10 shadow-lg text-white"
     }`;
 
-  // 🔥 Chart theme adaptation
+
   const textColor = isLight ? "#111" : "#eee";
 
   const option = {
     xAxis: {
       type: "category",
-      data: filteredNotes,
+      data: filteredNotes, // Dates
       name: "Date",
       nameLocation: "middle",
       nameGap: 25,
@@ -75,7 +107,7 @@ const Activity = () => {
     },
     series: [
       {
-        data: words,
+        data: words, // Words
         type: "line",
         smooth: true
       }
