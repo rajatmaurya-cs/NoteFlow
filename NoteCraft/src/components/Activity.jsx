@@ -69,7 +69,6 @@ const Activity = () => {
         value: freqObj[subject]
       });
     }
-
     setPie(arr);
 
   }, []);
