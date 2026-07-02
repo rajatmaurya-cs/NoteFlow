@@ -46,7 +46,7 @@ const Notepad = () => {
 
     placeholder: "Start typing...",
 
-    height: 400,
+    height: 1000,
 
   }), []);
 

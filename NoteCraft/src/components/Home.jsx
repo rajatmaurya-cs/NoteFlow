@@ -16,22 +16,70 @@ const Home = () => {
   const [Data, setData] = useState([]);
 
   useEffect(() => {
+    let savedData = JSON.parse(localStorage.getItem("myData"));
 
-    const savedData = JSON.parse(localStorage.getItem("myData"));
-
-    if (savedData) {
-
-      setData(savedData);
-
-    } else {
-
-      setData(Notes);
-
-      console.log("The data is: ", Data)
-
+    if (!savedData || savedData.length === 0) {
+      savedData = Notes;
       localStorage.setItem("myData", JSON.stringify(Notes));
-
     }
+
+    let updated = false;
+    const mockIdToRelativeDays = {
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6
+    };
+
+    const staticToRelativeDays = {
+      "2026-06-7": 1,
+      "2026-06-6": 2,
+      "2026-06-5": 3,
+      "2026-06-4": 4,
+      "2026-06-3": 5,
+      "2026-06-2": 6,
+      "2026-06-07": 1,
+      "2026-06-06": 2,
+      "2026-06-05": 3,
+      "2026-06-04": 4,
+      "2026-06-03": 5,
+      "2026-06-02": 6,
+    };
+
+    const today = new Date();
+    const formatDateObj = (dateObj) => {
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    savedData = savedData.map(note => {
+      let daysAgo = undefined;
+      if (mockIdToRelativeDays[note.id] !== undefined) {
+        daysAgo = mockIdToRelativeDays[note.id];
+      } else if (note.date && staticToRelativeDays[note.date] !== undefined) {
+        daysAgo = staticToRelativeDays[note.date];
+      }
+
+      if (daysAgo !== undefined) {
+        const d = new Date();
+        d.setDate(today.getDate() - daysAgo);
+        const newDate = formatDateObj(d);
+        if (note.date !== newDate) {
+          note.date = newDate;
+          updated = true;
+        }
+      }
+      return note;
+    });
+
+    if (updated) {
+      localStorage.setItem("myData", JSON.stringify(savedData));
+    }
+    setData(savedData);
   }, []);
 
   const isLight = Theme === "Light";

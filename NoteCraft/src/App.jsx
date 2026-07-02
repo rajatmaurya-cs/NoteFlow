@@ -14,6 +14,7 @@ import Practice from "./components/Practice";
 import Night from "./components/Animation/Night";
 import Aimode from "./components/Aimode";
 import AboutUs from "./components/AboutUs";
+import Tutor from "./components/Tutor";
 
 function App() {
   const { Theme } = useContext(ToggleTheme);
@@ -48,6 +49,7 @@ function App() {
         <Route path="/y" element={<Practice />} />
         <Route path="/ai" element={<Aimode />} />
         <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/tutor" element={<Tutor />} />
       </Routes>
     </div>
   );

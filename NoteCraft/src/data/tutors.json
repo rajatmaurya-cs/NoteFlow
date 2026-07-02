@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Arvind Kumar",
+    "subject": "Mathematics",
+    "bio": "Dr. Kumar has a passion for breaking down complex calculus and algebra concepts into easy-to-understand logical steps. He has helped hundreds of students clear competitive exams like JEE.",
+    "rating": 4.9,
+    "avatar": "https://images.unsplash.com/photo-1557862921-37829c790f19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWFufGVufDB8fDB8fHww",
+    "experience": "15+ Years",
+    "degree": "Ph.D. in Mathematics, IIT Delhi",
+    "coreSubjects": ["Calculus", "Algebra", "Trigonometry"]
+  },
+  {
+    "id": 2,
+    "name": "Prof. Priya Sharma",
+    "subject": "Physics",
+    "bio": "Prof. Sharma specializes in making Physics intuitive through real-world examples. Her interactive teaching methods make learning mechanics and electromagnetism fun and engaging.",
+    "rating": 4.8,
+    "avatar": "https://images.unsplash.com/photo-1735331467260-0153c5fbd31d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTI2fHxpbmRpYW4lMjBhdW50eSUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D",
+    "experience": "12+ Years",
+    "degree": "M.Sc. in Applied Physics, IISc Bangalore",
+    "coreSubjects": ["Mechanics", "Electromagnetism", "Optics"]
+  },
+  {
+    "id": 3,
+    "name": "Rajesh Singh",
+    "subject": "Chemistry",
+    "bio": "An expert in Organic Chemistry, Rajesh believes in visual learning. His sessions are filled with 3D molecular modeling and practical insights into chemical reactions.",
+    "rating": 4.7,
+     "avatar": "https://media.istockphoto.com/id/1587315781/photo/happy-laughing-guy-posing-with-arms-folded.webp?a=1&b=1&s=612x612&w=0&k=20&c=pQjzvhpF0m66H5O9YMIgM6tAjtP1BUoAP4ChXnIpJTA=",
+    "experience": "10+ Years",
+    "degree": "M.Sc. in Chemistry, BHU",
+    "coreSubjects": ["Organic Chemistry", "Physical Chemistry", "Inorganic Chemistry"]
+  },
+  {
+    "id": 4,
+    "name": "Dr. Sunita Verma",
+    "subject": "Biology",
+    "bio": "Dr. Verma is a dedicated botanist and zoologist. Her deep knowledge of human anatomy and plant physiology has helped many aspiring medical students achieve their goals.",
+    "rating": 5.0,
+    "avatar": "https://plus.unsplash.com/premium_photo-1682089841647-458dd29dc0ee?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aW5kaWFuJTIwYXVudHklMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D",
+    "experience": "18+ Years",
+    "degree": "Ph.D. in Biological Sciences, AIIMS",
+    "coreSubjects": ["Human Anatomy", "Genetics", "Botany"]
+  },
+  {
+    "id": 5,
+    "name": "Amit Patel",
+    "subject": "Computer Science",
+    "bio": "Amit is a former software engineer who transitioned to teaching. He focuses on core programming logic, algorithms, and full-stack development to make students industry-ready.",
+    "rating": 4.9,
+    "avatar": "https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjZ8fG1hbnxlbnwwfHwwfHx8MA%3D%3D",
+    "experience": "8+ Years",
+    "degree": "B.Tech in Computer Science, NIT Trichy",
+    "coreSubjects": ["Data Structures", "Algorithms", "Web Development"]
+  },
+  {
+    "id": 6,
+    "name": "Meena Iyer",
+    "subject": "English",
+    "bio": "Meena brings literature to life. From Shakespearean dramas to modern Indian writing, her classes focus on critical thinking, vocabulary building, and advanced grammar.",
+    "rating": 4.8,
+    "avatar": "https://plus.unsplash.com/premium_photo-1682089789852-e3023ff6df24?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aW5kaWFuJTIwdGVhY2hlciUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D",
+    "experience": "20+ Years",
+    "degree": "M.A. in English Literature, JNU",
+    "coreSubjects": ["British Literature", "Grammar", "Creative Writing"]
+  },
+  {
+    "id": 7,
+    "name": "Anil Desai",
+    "subject": "History",
+    "bio": "Anil believes history is not just about dates, but about stories. He specializes in Modern Indian History and World History, providing a captivating narrative approach.",
+    "rating": 4.7,
+    "avatar": "https://images.unsplash.com/photo-1758336011136-343678e4fc05?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGluZGlhbiUyMHRlYWNoZXIlMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D",
+    "experience": "14+ Years",
+    "degree": "M.A. in History, Delhi University",
+    "coreSubjects": ["Modern Indian History", "World History", "Ancient India"]
+  },
+  {
+    "id": 8,
+    "name": "Kavita Reddy",
+    "subject": "Economics",
+    "bio": "Kavita simplifies complex economic theories. Her macro and microeconomics classes are filled with case studies from the Indian and global economy.",
+    "rating": 4.9,
+    "avatar": "https://plus.unsplash.com/premium_photo-1682089854123-740310ebad43?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGluZGlhbiUyMHRlYWNoZXIlMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D",
+    "experience": "11+ Years",
+    "degree": "Ph.D. in Economics, DSE",
+    "coreSubjects": ["Microeconomics", "Macroeconomics", "Indian Economy"]
+  },
+  {
+    "id": 9,
+    "name": "Suresh Menon",
+    "subject": "Geography",
+    "bio": "Suresh makes learning geography a global tour. His expertise lies in physical geography and environmental science, utilizing digital mapping tools for better understanding.",
+    "rating": 4.6,
+    "avatar": "https://images.unsplash.com/photo-1758685734614-63fe30c18b79?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjR8fGluZGlhbiUyMHRlYWNoZXIlMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D",
+    "experience": "16+ Years",
+    "degree": "M.Sc. in Geography, University of Madras",
+    "coreSubjects": ["Physical Geography", "Human Geography", "Environmental Science"]
+  },
+  {
+    "id": 10,
+    "name": "Neha Gupta",
+    "subject": "Accountancy",
+    "bio": "A certified Chartered Accountant, Neha teaches Accountancy with a practical edge. She ensures students master the fundamentals of financial statements and corporate accounting.",
+    "rating": 5.0,
+    "avatar": "https://images.unsplash.com/photo-1659355893982-cb1e87a8758a?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aW5kaWFuJTIwdGVhY2hlciUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D",
+    "experience": "9+ Years",
+    "degree": "Chartered Accountant (ICAI), B.Com",
+    "coreSubjects": ["Financial Accounting", "Corporate Accounting", "Taxation"]
+  }
+]

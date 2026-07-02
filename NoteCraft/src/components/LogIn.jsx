@@ -36,10 +36,15 @@ const LogIn = () => {
   }
 
 
-  if (password.length <= 6) {
-    toast.error("Password must be greater than 6 characters");
-    return;
-  }
+  // if (password.length <= 6) {
+  //   toast.error("Password must be greater than 6 characters");
+  //   return;
+  // }
+
+ if(email != 'rajatmaurya176@gmail.com' || password !='rajat@123') {
+  toast.error("Invalide Email & Password")
+  return ;
+ }
 
   sessionStorage.setItem("user", JSON.stringify(email));
 

@@ -36,6 +36,7 @@ app.post('/api/ai', async (req,res)=>{
 
   
   const {question} = req.body;
+  
   const {model} = req.body
 
   console.log("The Model is: ",model)
